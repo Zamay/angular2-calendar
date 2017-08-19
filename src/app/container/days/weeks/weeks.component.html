@@ -1,16 +1,5 @@
 <div>
-  <span>
-    <app-weekday></app-weekday>
-  </span>
-  <span>
-    <app-weekday></app-weekday>
-  </span>
-  <span>
-    <app-weekday></app-weekday>
-  </span>
-  <span>
-    <app-weekday></app-weekday>
-  </span>
-
-
+  <div *ngFor="let week of weeks; let i = index">
+    <app-weekday [numWeek]="i" ></app-weekday>
+  </div>
 </div>

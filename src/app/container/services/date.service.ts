@@ -8,9 +8,7 @@ export class DateService {
   public currMonth: number;
   public currYear: number;
   public currDay: number;
-  public firstDayOfMonth: number;
-  public lastDateOfMonth: number;
-  public lastDayOfLastMonth: number;
+  public days: Array<any>;
 
   constructor() {
     this.totalDate();
@@ -21,11 +19,6 @@ export class DateService {
     this.currMonth = d.getMonth();
     this.currYear = d.getFullYear();
     this.currDay = d.getDate();
-
-    this.firstDayOfMonth = new Date(this.currYear, this.currMonth, 1).getDay();
-    this.lastDateOfMonth = new Date(this.currYear, this.currMonth + 1, 0).getDate();
-    this.lastDayOfLastMonth = this.currMonth === 0 ? new Date(this.currYear - 1, 11, 0).getDate() :
-      new Date(this.currYear, this.currMonth, 0).getDate();
   }
 
   public nextMonth() {
@@ -35,8 +28,8 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth + 1;
     }
-    this.showMonth(this.currYear, this.currMonth)
-    return [this.Months[this.currMonth], this.currYear];
+    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
   public previousMonth() {
@@ -46,11 +39,13 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth - 1;
     }
-    return [this.Months[this.currMonth], this.currYear];
+    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
   public showCurrMonth() {
-    return [this.Months[this.currMonth], this.currYear];
+    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
   // получение даты
@@ -62,58 +57,45 @@ export class DateService {
       lastDateOfMonth = new Date(y, m + 1, 0).getDate(),
       lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
+    let arr = [];
+    let arrs = [];
     let i = 1;
     do {
-      let dow = new Date(y, m, i).getDay(),
-          qwe;
-      qwe = i - 1;
+      let dow = new Date(y, m, i).getDay();
+
       if (dow === 0) {
-        for (let j = 0; j < 6; j++) {
-          qwe += 1;
-          console.log(qwe);
+        arr = [];
+      } else if ( i === 1 ) {
+        let k = lastDayOfLastMonth - firstDayOfMonth + 1;
+        for (let j = 0; j < firstDayOfMonth; j++) {
+          arr.push(k);
+          k++;
         }
-        i = qwe;
       }
 
-
-      // if (dow === 0) {
-      //   console.log(0);
-      // }
-      //
-      // // else if ( i === 1 ) {
-      // //
-      // //   let k = lastDayOfLastMonth - firstDayOfMonth+1;
-      // //   for(let j=0; j < firstDayOfMonth; j++) {
-      // //     k
-      // //     k++;
-      // //   }
-      // // }
-      //
-      //
-      let chk = new Date();
-      let chkY = chk.getFullYear();
-      let chkM = chk.getMonth();
+      let chk   = new Date();
+      let chkY  = chk.getFullYear();
+      let chkM  = chk.getMonth();
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
-        console.log('today');
+        arr.push(i + '');
       } else {
-        console.log('other');
+        arr.push(i);
       }
-      //
-      // if (dow === 6) {
-      //   console.log(6);
-      // }
-      //
-      // // else if (i === lastDateOfMonth ) {
-      // //   let k=1;
-      // //   for(dow; dow < 6; dow++) {
-      // //     k
-      // //     k++;
-      // //   }
-      // // }
-      console.log(i);
+
+      if (dow === 6) {
+        arrs.push(arr);
+      } else if (i === lastDateOfMonth ) {
+        let k = 1;
+        for (dow; dow < 6; dow++) {
+          arr.push(k);
+          k++;
+        }
+        arrs.push(arr);
+      }
+
       i++;
     } while (i <= lastDateOfMonth);
 
-
+    return arrs;
   }
 }

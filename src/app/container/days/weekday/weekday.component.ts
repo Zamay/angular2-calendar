@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { DateService }       from '../../services/date.service';
 
 @Component({
   selector: 'app-weekday',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeekdayComponent implements OnInit {
 
-  constructor() { }
+  @Input() numWeek: any;
+  public weekDay: any;
+  constructor(private dateServive: DateService) { }
 
   ngOnInit() {
+    this.weekDay = this.dateServive.showCurrMonth()[2][this.numWeek];
+
+
   }
 
 }

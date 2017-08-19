@@ -19,11 +19,11 @@ export class NavigationComponent implements OnInit {
   }
 
   public btnPrev() {
-    this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.nextMonth());
+    this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.previousMonth());
   }
 
   public btnNext() {
-    this.shareableStreamStoreService.emit('btnNext' , this.dateServive.previousMonth());
+    this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
   }
 
 }
