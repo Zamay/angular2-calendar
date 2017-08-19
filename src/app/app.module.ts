@@ -1,12 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
+import { NgModule }       from '@angular/core';
+import { CommonModule }   from '@angular/common';
 
-import { AppComponent } from './app.component';
-import {NavModule}      from './nav/nav.module';
-import {HeaderModule}   from './header/header.module';
-import {CommonModule} from "@angular/common";
-import {MainModule} from "./main/main.module";
-
+import { AppComponent }     from './app.component';
+import { ContainerModule }  from './container/container.module';
 
 @NgModule({
   declarations: [
@@ -15,9 +12,7 @@ import {MainModule} from "./main/main.module";
   imports: [
     BrowserModule,
     CommonModule,
-    NavModule,
-    MainModule,
-    HeaderModule
+    ContainerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

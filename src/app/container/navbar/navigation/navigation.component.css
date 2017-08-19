@@ -1,0 +1,14 @@
+._nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  outline: none;
+  color: #c0c0c0;
+  cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+}
