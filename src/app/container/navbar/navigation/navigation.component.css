@@ -12,3 +12,7 @@ button {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
 }
+button:hover {
+  color: rgb(40,40,59);
+  font-weight:bold;
+}

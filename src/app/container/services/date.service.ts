@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {MONTHS} from '../shared/cal.data';
+import { MONTHS }   from '../shared/cal.data';
 
 @Injectable()
 export class DateService {
@@ -8,7 +8,6 @@ export class DateService {
   public currMonth: number;
   public currYear: number;
   public currDay: number;
-  public days: Array<any>;
 
   constructor() {
     this.totalDate();
@@ -28,7 +27,7 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth + 1;
     }
-    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    const arrDay = this.showDays(this.currYear, this.currMonth);
     return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
@@ -39,18 +38,18 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth - 1;
     }
-    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    const arrDay = this.showDays(this.currYear, this.currMonth);
     return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
   public showCurrMonth() {
-    const arrDay = this.showMonth(this.currYear, this.currMonth);
+    const arrDay = this.showDays(this.currYear, this.currMonth);
     return [this.Months[this.currMonth], this.currYear, arrDay];
   }
 
   // получение даты
 
-  public showMonth(y, m) {
+  public showDays(y, m) {
 
     const d = new Date(),
       firstDayOfMonth = new Date(y, m, 1).getDay(),
@@ -58,7 +57,7 @@ export class DateService {
       lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
     let arr = [];
-    let arrs = [];
+    const arrs = [];
     let i = 1;
     do {
       let dow = new Date(y, m, i).getDay();
@@ -68,7 +67,7 @@ export class DateService {
       } else if ( i === 1 ) {
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
         for (let j = 0; j < firstDayOfMonth; j++) {
-          arr.push(k);
+          arr.push(k + '');
           k++;
         }
       }
@@ -77,7 +76,7 @@ export class DateService {
       let chkY  = chk.getFullYear();
       let chkM  = chk.getMonth();
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
-        arr.push(i + '');
+        arr.push(i);
       } else {
         arr.push(i);
       }
@@ -87,7 +86,7 @@ export class DateService {
       } else if (i === lastDateOfMonth ) {
         let k = 1;
         for (dow; dow < 6; dow++) {
-          arr.push(k);
+          arr.push(k + '');
           k++;
         }
         arrs.push(arr);

@@ -14,8 +14,8 @@ export class WeekdayComponent implements OnInit {
 
   ngOnInit() {
     this.weekDay = this.dateServive.showCurrMonth()[2][this.numWeek];
-
-
   }
 
+  // *ngIf="show; then thenBlock; else elseBlock"
+  // [ngClass]="{'first': true, 'second': true, 'third': false}"
 }

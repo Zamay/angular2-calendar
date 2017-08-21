@@ -1,6 +1,7 @@
 ._months {
   display: flex;
   padding: 10px 0;
+  font-size: 1.5em;
   justify-content: center;
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;

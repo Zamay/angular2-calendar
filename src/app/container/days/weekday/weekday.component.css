@@ -1,6 +1,10 @@
 ._weekday {
   display: flex;
-  justify-content: space-around;
   font-family: "Roboto Condensed", sans-serif;
 }
 
+._day {
+  width: 14.28571429%;
+  text-align: center;
+  padding:13px 0;
+}
