@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }           from '@angular/core';
 
 import { DateService }                 from '../../services/date.service';
 import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';

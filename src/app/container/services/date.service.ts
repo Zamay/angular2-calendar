@@ -28,7 +28,8 @@ export class DateService {
       this.currMonth = this.currMonth + 1;
     }
     const arrDay = this.showDays(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, arrDay];
+    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay, obj_arrDay];
   }
 
   public previousMonth() {
@@ -39,12 +40,14 @@ export class DateService {
       this.currMonth = this.currMonth - 1;
     }
     const arrDay = this.showDays(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, arrDay];
+    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay, obj_arrDay];
   }
 
   public showCurrMonth() {
     const arrDay = this.showDays(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, arrDay];
+    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    return [this.Months[this.currMonth], this.currYear, arrDay, obj_arrDay];
   }
 
   // получение даты
@@ -58,6 +61,7 @@ export class DateService {
 
     let arr = [];
     const arrs = [];
+
     let i = 1;
     do {
       let dow = new Date(y, m, i).getDay();
@@ -76,7 +80,7 @@ export class DateService {
       let chkY  = chk.getFullYear();
       let chkM  = chk.getMonth();
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
-        arr.push(i);
+        arr.push(i + '');
       } else {
         arr.push(i);
       }
@@ -97,4 +101,72 @@ export class DateService {
 
     return arrs;
   }
+
+
+  //////////////////////////////////
+  public obj_showDays(y, m) {
+    const d = new Date(),
+      firstDayOfMonth = new Date(y, m, 1).getDay(),
+      lastDateOfMonth = new Date(y, m + 1, 0).getDate(),
+      lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+
+    let   obj  = {};
+    const arrs = [];
+    let arr = []
+
+    let i = 1;
+    do {
+      let dow = new Date(y, m, i).getDay();
+
+      if (dow === 0) {
+        // obj = {};
+        arr = []
+      } else if ( i === 1 ) {
+        let k = lastDayOfLastMonth - firstDayOfMonth + 1;
+        for (let j = 0; j < firstDayOfMonth; j++) {
+          obj = {
+            number: k,
+            type: 'yesterday'
+          };
+          arr.push(obj)
+          k++;
+        }
+      }
+
+      let chk   = new Date();
+      let chkY  = chk.getFullYear();
+      let chkM  = chk.getMonth();
+      if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
+        obj = {
+          number: i,
+          type: 'current'
+        };
+        arr.push(obj)
+      } else {
+        obj = {
+          number: i,
+          type: 'today'
+        };
+        arr.push(obj)
+      }
+
+      if (dow === 6) {
+        arrs.push(arr);
+      } else if (i === lastDateOfMonth ) {
+        let k = 1;
+        for (dow; dow < 6; dow++) {
+          obj = {
+            number: k,
+            type: 'tomorrow'
+          };
+          arr.push(obj)
+          k++;
+        }
+        arrs.push(arr);
+      }
+      i++;
+    } while (i <= lastDateOfMonth);
+    return arrs;
+  }
+
 }

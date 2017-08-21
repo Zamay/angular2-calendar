@@ -7,4 +7,18 @@
   width: 14.28571429%;
   text-align: center;
   padding:13px 0;
+  align-self: center;
+}
+.yesterday, .tomorrow {
+  color: #c0c0c0;
+}
+
+.current {
+  color: #28283b;
+  font-size: 1.5em;
+  border-bottom: 1px solid;
+}
+
+.today {
+  color: #000;
 }

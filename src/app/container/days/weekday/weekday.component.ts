@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { DateService }       from '../../services/date.service';
-
+import { DateService }            from '../../services/date.service';
 @Component({
   selector: 'app-weekday',
   templateUrl: './weekday.component.html',
@@ -9,13 +8,16 @@ import { DateService }       from '../../services/date.service';
 export class WeekdayComponent implements OnInit {
 
   @Input() numWeek: any;
-  public weekDay: any;
+  public   items  : any;
   constructor(private dateServive: DateService) { }
 
   ngOnInit() {
-    this.weekDay = this.dateServive.showCurrMonth()[2][this.numWeek];
+    this.items = this.dateServive.showCurrMonth()[3][this.numWeek];
   }
 
-  // *ngIf="show; then thenBlock; else elseBlock"
-  // [ngClass]="{'first': true, 'second': true, 'third': false}"
+  public getStyle(type: string) {
+    return type;
+  }
+
+
 }

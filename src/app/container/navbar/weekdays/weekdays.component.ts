@@ -1,4 +1,5 @@
 import { Component }  from '@angular/core';
+
 import { DaysOfWeek } from '../../shared/cal.data';
 
 @Component({
@@ -9,6 +10,5 @@ import { DaysOfWeek } from '../../shared/cal.data';
 export class WeekdaysComponent {
 
   public daysOfWeek: Array<string> = DaysOfWeek;
-  constructor() { }
 
 }

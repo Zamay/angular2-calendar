@@ -1,5 +1,5 @@
 <div class="_weekday">
-  <span class="_day" *ngFor="let day of weekDay">
-    {{day}}
+  <span class="_day" *ngFor="let item of items">
+    <span [ngClass]=getStyle(item.type)>{{item['number']}}</span>
   </span>
 </div>

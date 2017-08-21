@@ -14,6 +14,6 @@ import { MonthsModule }     from './months/months.module';
     NavigationModule
   ],
   declarations: [NavbarComponent],
-  exports: [NavbarComponent]
+  exports:      [NavbarComponent]
 })
 export class NavbarModule { }

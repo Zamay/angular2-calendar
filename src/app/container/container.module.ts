@@ -4,8 +4,8 @@ import { CommonModule }       from '@angular/common';
 import { NavbarModule }       from './navbar/navbar.module';
 import { DaysModule }         from './days/days.module';
 import { ContainerComponent } from './container.component';
-import { DateService }        from './services/date.service';
 
+import { DateService }                 from './services/date.service';
 import { ShareableStreamStoreService } from "./services/shareable-stream-store.service";
 
 @NgModule({

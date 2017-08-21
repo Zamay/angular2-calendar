@@ -3,10 +3,8 @@ import { CommonModule }     from '@angular/common';
 import { MonthsComponent }  from './months.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports:      [CommonModule],
   declarations: [MonthsComponent],
-  exports: [MonthsComponent],
+  exports:      [MonthsComponent],
 })
 export class MonthsModule { }

@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit}   from '@angular/core';
+import { Subscription }                 from 'rxjs/Subscription';
 
 import { DateService }                  from '../../services/date.service';
 import { ShareableStreamStoreService }  from '../../services/shareable-stream-store.service';
@@ -9,7 +10,8 @@ import { ShareableStreamStoreService }  from '../../services/shareable-stream-st
   styleUrls: ['./months.component.css']
 })
 export class MonthsComponent implements OnInit, OnDestroy {
-  public currMonth: Array<any>;
+  public currMonth:     Array<any>;
+  public subscription:  Subscription;
   constructor(
     private dateServive: DateService,
     private shareableStreamStoreService: ShareableStreamStoreService
@@ -20,17 +22,18 @@ export class MonthsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'day'];
 
-    this.shareableStreamStoreService.getStream('btnPrev')
+    this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => this.currMonth = value);
 
-    this.shareableStreamStoreService.getStream('btnNext')
+    this.subscription = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
       .subscribe(value => this.currMonth = value);
   }
 
   ngOnDestroy() {
-
+    console.log('end');
+    this.subscription.unsubscribe();
   }
 
 }

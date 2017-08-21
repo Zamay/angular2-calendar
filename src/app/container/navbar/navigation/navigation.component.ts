@@ -8,15 +8,12 @@ import { ShareableStreamStoreService }  from '../../services/shareable-stream-st
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
 
   constructor(
     private shareableStreamStoreService: ShareableStreamStoreService,
     private dateServive: DateService
     ) { }
-
-  ngOnInit() {
-  }
 
   public btnPrev() {
     this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.previousMonth());
