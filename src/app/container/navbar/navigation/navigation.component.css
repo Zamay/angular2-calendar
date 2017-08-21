@@ -13,7 +13,30 @@ button {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
 }
-button:hover {
+button:hover{
+  color: rgb(40,40,59);
+  font-weight:bold;
+}
+
+.close {
+  text-decoration: none;
+  outline: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  text-align: center;
+  position: relative;
+  margin: -4px -165px;
+  border: 2px solid lightgray;
+}
+
+.close a {
+  text-decoration: none;
+  color: lightgray;
+}
+
+.close:hover {
+  border: 2px solid rgb(40,40,59);
   color: rgb(40,40,59);
   font-weight:bold;
 }

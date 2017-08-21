@@ -23,4 +23,8 @@ export class NavigationComponent {
     this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
   }
 
+  public bntClose() {
+    this.shareableStreamStoreService.emit('bntClose' , false);
+  }
+
 }
