@@ -20,6 +20,7 @@ button:hover{
 
 .close {
   text-decoration: none;
+  font-size: 22px;
   outline: none;
   width: 25px;
   height: 25px;
@@ -34,7 +35,9 @@ button:hover{
   text-decoration: none;
   color: lightgray;
 }
-
+.close a:hover {
+  color: rgb(40,40,59);
+}
 .close:hover {
   border: 2px solid rgb(40,40,59);
   color: rgb(40,40,59);

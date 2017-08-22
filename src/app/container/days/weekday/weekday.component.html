@@ -1,5 +1,8 @@
 <div class="_weekday">
   <span class="_day" *ngFor="let item of items">
-    <span [ngClass]=getStyle(item.type)>{{item['number']}}</span>
+    <span [ngClass]=getStyle(item.type) (click)="addNote($event)">{{item['number']}}</span>
   </span>
+</div>
+<div *ngIf="showModal">
+  <app-modal [getday]="day" [getNote]="noteDay"></app-modal>
 </div>

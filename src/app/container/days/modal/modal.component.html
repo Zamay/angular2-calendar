@@ -1,0 +1,19 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2>Make a note</h2>
+      <a href="#" class="btn-close" (click)="closeMod($event)">×</a>
+    </div>
+    <div class="modal-body">
+      <p *ngIf="getNote">
+        <textarea name="note" cols="30" rows="10" autofocus #area value="{{getNote}}"></textarea>
+      </p>
+      <p *ngIf="!getNote">
+        <textarea name="note" cols="30" rows="10" autofocus #area></textarea>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" (click)="saveNote(area?.value)">Save</a>
+    </div>
+  </div>
+</div>
