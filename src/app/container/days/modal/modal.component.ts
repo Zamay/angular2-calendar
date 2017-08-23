@@ -3,6 +3,7 @@ import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
 import { DateService } from "../../services/date.service";
 import { Subscription } from "rxjs/Subscription";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-modal',
@@ -11,26 +12,31 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class ModalComponent implements OnInit {
 
-  public   thisMonth:     any;
-  @Input() public getday: any;
-  @Input() public getNote: any;
-  public   subscription:  Subscription;
+  public   thisMonth:      any;
+  @Input() selectedDay:    any;
+  @Input() getNote:        any;
+  public   subscription:   Subscription;
+  public   formDate:       FormGroup;
   constructor(
     private dateServive: DateService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) { }
 
   ngOnInit() {
+    this.formDate = new FormGroup({
+      'note': new FormControl(this.getNote || '')
+    });
     this.thisMonth = this.dateServive.showCurrMonth();
   }
 
-  public closeMod(e: any) {
+  public closeMod() {
     this.shareableStreamStoreService.emit('closeModal' , false);
   }
 
-  public saveNote(note: any) {
-    console.log(note.value);
-    localStorage.setItem(this.getday + '/' + this.thisMonth[0] + '/' + this.thisMonth[1], note);
-    this.shareableStreamStoreService.emit('saveNote' , [note, false]);
+  public saveNote() {
+    console.log(this.formDate.value.note);
+    localStorage.setItem(this.selectedDay + '/' + this.thisMonth[0] + '/' + this.thisMonth[1], this.formDate.value.note);
+
+    this.closeMod();
   }
 }

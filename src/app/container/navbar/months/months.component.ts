@@ -20,7 +20,7 @@ export class MonthsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'day'];
+    this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'selectedDay'];
 
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
