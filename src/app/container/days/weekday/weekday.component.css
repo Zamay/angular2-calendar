@@ -8,6 +8,7 @@
   text-align: center;
   padding:13px 0;
   align-self: center;
+  cursor: pointer
 }
 .yesterday, .tomorrow {
   color: #c0c0c0;

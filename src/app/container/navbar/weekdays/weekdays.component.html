@@ -1,5 +1,5 @@
 <div >
   <div class="_weekdays">
-    <span class="_day" *ngFor="let i of daysOfWeek">{{i}}</span>
+    <span class="_day" *ngFor="let i of daysOfWeek; let i = index">{{i}}</span>
   </div>
 </div>

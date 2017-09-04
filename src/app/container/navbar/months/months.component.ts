@@ -3,6 +3,7 @@ import { Subscription }                 from 'rxjs/Subscription';
 
 import { DateService }                  from '../../services/date.service';
 import { ShareableStreamStoreService }  from '../../services/shareable-stream-store.service';
+import { MONTHS }                       from "../../shared/cal.data";
 
 @Component({
   selector: 'app-months',
@@ -10,6 +11,7 @@ import { ShareableStreamStoreService }  from '../../services/shareable-stream-st
   styleUrls: ['./months.component.css']
 })
 export class MonthsComponent implements OnInit, OnDestroy {
+  public MONTHS: Array<any> = MONTHS;
   public currMonth:     Array<any>;
   public subscription:  Subscription;
   constructor(

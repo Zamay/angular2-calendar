@@ -29,7 +29,6 @@ export class WeekdayComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.thisMonth = this.dateServive.showCurrMonth();
     this.items = this.thisMonth[2][this.numWeek];
-
     this.subscription = this.shareableStreamStoreService.getStream('closeModal')
       .asObservable()
       .subscribe(value => this.showModal = value);
@@ -41,17 +40,24 @@ export class WeekdayComponent implements OnInit, OnDestroy {
 
   public addNote(e: any) {
     this.selectedDay = e.target.innerText;
+    const className = e.target.className;
 
-    let dmy = localStorage.getItem(this.selectedDay+'/'+this.thisMonth[0]+'/'+this.thisMonth[1]);
-    console.log(this.selectedDay + '/' + this.thisMonth[0] + '/' + this.thisMonth[1]);
-    console.log(dmy);
-    if (dmy) {
-      this.noteDay = dmy;
-    } else {
-      this.noteDay = false;
+    if (className === 'today' || className === 'carrent') {
+      let dmy = localStorage.getItem(this.selectedDay+'/'+this.thisMonth[0]+'/'+this.thisMonth[1]);
+      if (dmy) {
+        this.noteDay = dmy;
+      } else {
+        this.noteDay = false;
+      }
+
+      this.showModal = true;
     }
-
-    this.showModal = true;
+    if ( className === 'tomorrow') {
+      this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
+    }
+    if (className === 'yesterday') {
+      this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.previousMonth());
+    }
   }
 
   ngOnDestroy() {
