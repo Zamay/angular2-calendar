@@ -43,8 +43,9 @@ export class DateService {
   }
 
   public showCurrMonth() {
+    console.log();
     const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, obj_arrDay];
+    return [this.Months[this.currMonth], this.currYear, obj_arrDay, this.currDay];
   }
 
   // получение даты

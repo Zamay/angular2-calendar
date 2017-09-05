@@ -1,7 +1,7 @@
 ._months {
   display: flex;
   padding: 10px 0;
-  font-size: 1.5em;
+  font-size: 1.3em;
   justify-content: center;
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
@@ -51,4 +51,14 @@ button {
   border: 2px solid rgb(40,40,59);
   color: rgb(40,40,59);
   font-weight:bold;
+}
+
+._prev,._next, ._months {
+  align-self: center;
+}
+
+@media (min-width: 640px) {
+  ._months {
+    font-size: 1.5em;
+  }
 }

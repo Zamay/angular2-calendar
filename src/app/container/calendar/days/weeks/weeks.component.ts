@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { DateService }                 from '../../services/date.service';
-import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
+import { DateService }                 from '../../../services/date.service';
+import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
 import {Subscription} from "rxjs/Subscription";
 
 @Component({
@@ -35,7 +35,6 @@ export class WeeksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('end');
     this.subscription.unsubscribe();
   }
 }

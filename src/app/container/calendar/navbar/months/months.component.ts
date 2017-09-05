@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit}   from '@angular/core';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { DateService }                  from '../../services/date.service';
-import { ShareableStreamStoreService }  from '../../services/shareable-stream-store.service';
-import { MONTHS }                       from "../../shared/cal.data";
+import { DateService }                  from '../../../services/date.service';
+import { ShareableStreamStoreService }  from '../../../services/shareable-stream-store.service';
+import { MONTHS }                       from "../../../shared/cal.data";
 
 @Component({
   selector: 'app-months',

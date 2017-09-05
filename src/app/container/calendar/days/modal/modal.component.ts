@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 
-import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
-import { DateService } from "../../services/date.service";
+import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
+import { DateService } from "../../../services/date.service";
 import { Subscription } from "rxjs/Subscription";
 import {FormControl, FormGroup} from "@angular/forms";
 

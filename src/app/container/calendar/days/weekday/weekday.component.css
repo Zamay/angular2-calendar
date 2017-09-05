@@ -10,7 +10,8 @@
   align-self: center;
   cursor: pointer
 }
-.yesterday, .tomorrow {
+
+.yesterday, .tomorrow, .lastDay {
   color: #c0c0c0;
 }
 
@@ -23,3 +24,15 @@
 .today {
   color: #000;
 }
+
+/*.activeDate {*/
+  /*position: absolute;*/
+  /*border-radius: 30px;*/
+  /*max-width: 35px;*/
+  /*max-height: 7px;*/
+  /*line-height: 8px;*/
+  /*background: #FF6E40;*/
+  /*margin:0 auto;*/
+  /*color: #ffffff;*/
+  /*font-size: 1.5em;*/
+/*}*/

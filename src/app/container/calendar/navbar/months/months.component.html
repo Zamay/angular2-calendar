@@ -1,13 +1,15 @@
 <div class="_nav">
-  <button (click)="btnPrev()"><</button>
-
+  <div class="_prev">
+    <button (click)="btnPrev()"><</button>
+  </div>
   <div class="_months">
     <span>{{currMonth[0]}}
       {{currMonth[1]}}
     </span>
   </div>
-
-  <button (click)="btnNext()">></button>
+  <div class="_next">
+    <button (click)="btnNext()">></button>
+  </div>
 </div>
 
 <!--<select>-->
