@@ -6,3 +6,49 @@
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
 }
+._nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  outline: none;
+  color: #0DAD83;
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 2.4em;
+  background: transparent;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+}
+/*button:hover{*/
+  /*color: rgb(40,40,59);*/
+  /*font-weight:bold;*/
+/*}*/
+
+.close {
+  text-decoration: none;
+  font-size: 22px;
+  outline: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  text-align: center;
+  position: relative;
+  margin: -4px -165px;
+  border: 2px solid lightgray;
+}
+
+.close a {
+  text-decoration: none;
+  color: lightgray;
+}
+.close a:hover {
+  color: rgb(40,40,59);
+}
+.close:hover {
+  border: 2px solid rgb(40,40,59);
+  color: rgb(40,40,59);
+  font-weight:bold;
+}

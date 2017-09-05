@@ -1,4 +1,47 @@
-._cont {
-  width: 300px;
-  margin: 100px auto;
+body {
+  /*border: 1px solid #212941;*/
+  border-radius: 3px;
+}
+.grid {
+  max-width: 710px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+    "header"
+    "calendar"
+    "to-do";
+}
+
+.grid > * {
+  border-radius: 5px;
+  padding: 8px 15px;
+  color: #000000;
+  font-size: 18px;
+  font-family: roboto;
+}
+
+.header {
+  grid-area: header;
+  background: #0DAD83;
+}
+
+.calendar {
+  grid-area: calendar;
+}
+
+.to-do {
+  grid-area: to-do;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "calendar to-do"
+  }
+}
+._cal {
+  display: grid;
+  /*justify-content: center;  */
 }

@@ -2,7 +2,6 @@ import { NgModule }         from '@angular/core';
 import { CommonModule }     from '@angular/common';
 
 import { NavbarComponent }  from './navbar.component';
-import { NavigationModule } from './navigation/navigation.module';
 import { WeekdaysModule }   from './weekdays/weekdays.module';
 import { MonthsModule }     from './months/months.module';
 
@@ -10,8 +9,7 @@ import { MonthsModule }     from './months/months.module';
   imports: [
     CommonModule,
     MonthsModule,
-    WeekdaysModule,
-    NavigationModule
+    WeekdaysModule
   ],
   declarations: [NavbarComponent],
   exports:      [NavbarComponent]
