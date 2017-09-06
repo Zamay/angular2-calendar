@@ -26,40 +26,36 @@ export class WeekdayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.thisMonth = this.dateServive.showCurrMonth();
-    this.items = this.thisMonth[2][this.numWeek];
-    this.thisDay = this.thisMonth[3]+'/'+this.thisMonth[0]+'/'+this.thisMonth[1];
-    this.subscription = this.shareableStreamStoreService.getStream('closeModal')
-      .asObservable()
-      .subscribe(value => this.showModal = value);
+    this.items = this.thisMonth[3][this.numWeek];
+    // this.subscription = this.shareableStreamStoreService.getStream('closeModal')
+    //   .asObservable()
+    //   .subscribe(value => this.showModal = value);
   }
 
   public getStyle(item: any) {
-    let clickDate = item.number+'/'+this.thisMonth[0]+'/'+this.thisMonth[1];
-    // console.log(this.thisDay);
-    console.log(clickDate);
-    // Проверка на прошедший день
-    if ( item.type === 'today' ) {
-      if ( clickDate < this.thisDay ) {
-        return 'lastDay';
-      }
-    }
-
-    // if (item.type === 'current') {
-    //   return 'activeDate';
-    // }
+    // TODO: Проверка на прошедший день и месяц
     return item.type;
   }
 
   public addNote(e: any) {
     this.selectedDay = e.target.innerText;
-    const className = e.target.className;
-    // проверка этого дней этого месяца
+    const className  = e.target.className;
+
+    // console.log(this.thisMonth);
+
+    // Отображение в header даты
+    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(this.selectedDay))
+
+
+    // проверка дней этого месяца
     if (className === 'today' || className === 'current') {
       let dmy = localStorage.getItem(this.selectedDay+'/'+this.thisMonth[0]+'/'+this.thisMonth[1]);
       (dmy) ? this.noteDay = dmy : this.noteDay = false ;
 
-      this.showModal = true;
+      // this.showModal = true;
     }
+
+
     // переход на пред и след мусяци при надатии на дату
     if ( className === 'tomorrow') {
       this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
@@ -70,7 +66,7 @@ export class WeekdayComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
 }

@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Injectable}   from '@angular/core';
 
-import { MONTHS }   from '../shared/cal.data';
+import {DAYS, MONTHS} from '../shared/cal.data';
 
 @Injectable()
 export class DateService {
   public Months: Array<string> = MONTHS;
+  public Days: Array<any> = DAYS;
   public currMonth: number;
   public currYear: number;
   public currDay: number;
@@ -43,9 +44,17 @@ export class DateService {
   }
 
   public showCurrMonth() {
-    console.log();
     const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, obj_arrDay, this.currDay];
+    return [this.currDay, this.Months[this.currMonth], this.currYear, obj_arrDay];
+  }
+
+  public currSelecDay() {
+    return this.selectedDay(this.currDay);
+  }
+
+  public selectedDay(day: number) {
+    const weekDay = this.Days[new Date(this.currYear, this.currMonth, day).getUTCDay()].long;
+    return [weekDay, this.Months[this.currMonth], day, this.currYear];
   }
 
   // получение даты
@@ -69,7 +78,7 @@ export class DateService {
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
         for (let j = 0; j < firstDayOfMonth; j++) {
           obj = {
-            number: k,
+            day: k,
             type: 'yesterday'
           };
           arr.push(obj);
@@ -82,13 +91,17 @@ export class DateService {
       let chkM  = chk.getMonth();
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
         obj = {
-          number: i,
+          day: i,
+          month: this.currMonth,
+          year: this.currYear,
           type: 'current'
         };
         arr.push(obj);
       } else {
         obj = {
-          number: i,
+          day: i,
+          month: this.currMonth,
+          year: this.currYear,
           type: 'today'
         };
         arr.push(obj);
@@ -100,7 +113,7 @@ export class DateService {
         let k = 1;
         for (dow; dow < 6; dow++) {
           obj = {
-            number: k,
+            day: k,
             type: 'tomorrow'
           };
           arr.push(obj);
@@ -110,6 +123,7 @@ export class DateService {
       }
       i++;
     } while (i <= lastDateOfMonth);
+    // console.log(arrs);
     return arrs;
   }
 

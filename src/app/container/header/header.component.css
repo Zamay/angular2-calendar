@@ -1,0 +1,28 @@
+._head {
+  display: grid;
+  grid-auto-rows: 30px;
+  justify-content: center;
+  color: white;
+  grid-row-gap: 10px;
+}
+
+._date {
+  justify-self: end;
+  align-self: center;
+  font-size: 14px;
+}
+._time {
+  justify-self: center;
+  align-self: center;
+}
+
+@media (min-width: 640px) {
+  ._head {
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: 50px;
+  }
+  ._time {
+    justify-self: start;
+  }
+
+}
