@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable }   from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ShareableStreamStoreService } from '../services/shareable-stream-store.service';
-import {DateService} from "../services/date.service";
+import { ShareableStreamStoreService }  from '../services/shareable-stream-store.service';
+import { DateService }                  from '../services/date.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

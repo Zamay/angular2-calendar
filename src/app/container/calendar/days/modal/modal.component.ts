@@ -15,7 +15,6 @@ export class ModalComponent implements OnInit {
   public   thisMonth:      any;
   @Input() selectedDay:    any;
   @Input() getNote:        any;
-  public   subscription:   Subscription;
   public   formDate:       FormGroup;
   constructor(
     private dateServive: DateService,
@@ -34,7 +33,6 @@ export class ModalComponent implements OnInit {
   }
 
   public saveNote() {
-    console.log(this.formDate.value.note);
     localStorage.setItem(this.selectedDay + '/' + this.thisMonth[0] + '/' + this.thisMonth[1], this.formDate.value.note);
 
     this.closeMod();

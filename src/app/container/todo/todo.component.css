@@ -1,0 +1,13 @@
+._todo {
+  display: grid;
+  grid-template-columns: minmax(250px, 350px);
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  ._todo {
+    display: grid;
+    justify-content: stretch;
+    align-self: stretch;
+  }
+}

@@ -77,11 +77,12 @@ export class DateService {
       } else if ( i === 1 ) {
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
         for (let j = 0; j < firstDayOfMonth; j++) {
-          obj = {
-            day: k,
-            type: 'yesterday'
-          };
-          arr.push(obj);
+          // obj = {
+          //   day: k,
+          //   type: 'yesterday'
+          // };
+          // arr.push(obj);
+          arr.push('');
           k++;
         }
       }
@@ -112,18 +113,18 @@ export class DateService {
       } else if (i === lastDateOfMonth ) {
         let k = 1;
         for (dow; dow < 6; dow++) {
-          obj = {
-            day: k,
-            type: 'tomorrow'
-          };
-          arr.push(obj);
+          // obj = {
+          //   day: k,
+          //   type: 'tomorrow'
+          // };
+          // arr.push(obj);
+          arr.push('');
           k++;
         }
         arrs.push(arr);
       }
       i++;
     } while (i <= lastDateOfMonth);
-    // console.log(arrs);
     return arrs;
   }
 

@@ -1,0 +1,62 @@
+/* Todo form */
+.todo-form {
+  display: flex;
+  padding: 0.5em 0.5em;
+  margin: 0 -1em;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  border-radius: 2px;
+  width: 104%;
+  background-color: white;
+}
+
+input {
+  flex:1;
+  font-size: 16px;
+  color: #757575;
+  background-color: #fafafa;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  padding: .25em;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  outline: none;
+}
+
+.todo-form input:focus {
+  border: 1px solid #1976D2;
+}
+
+.todo-form input:focus.ng-invalid.ng-dirty {
+  border: 1px solid #dd0031;
+}
+
+.todo-form button {
+  margin-left: 16px;
+
+}
+
+button[disabled] {
+  color: rgba(0,0,0,.26);
+  cursor: default;
+  background-color: transparent;
+}
+ button {
+   background: 0 0;
+   border: none;
+   border-radius: 2px;
+   color: #757575;
+   height: 36px;
+   font-family: 'Roboto', Helvetica, Arial, sans-serif;
+   text-transform: uppercase;
+   letter-spacing: 0;
+   overflow: hidden;
+   will-change: box-shadow;
+   outline: none;
+   cursor: pointer;
+ }
+
+/*button:hover {*/
+  /*background-color: rgba(158,158,158,.2);*/
+/*}*/
+button:active {
+  background-color: rgba(158,158,158,.2);
+}

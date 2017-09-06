@@ -4,6 +4,7 @@ import { CommonModule }       from '@angular/common';
 import { ContainerComponent } from './container.component';
 import { HeaderModule }       from './header/header.module';
 import { CalendarModule }     from './calendar/calendar.module';
+import { TodoModule }         from './todo/todo.module';
 
 import { DateService }                 from './services/date.service';
 import { ShareableStreamStoreService } from './services/shareable-stream-store.service';
@@ -13,7 +14,8 @@ import { ShareableStreamStoreService } from './services/shareable-stream-store.s
   imports: [
     CommonModule,
     HeaderModule,
-    CalendarModule
+    CalendarModule,
+    TodoModule
   ],
   declarations: [ContainerComponent],
   exports:      [ContainerComponent],

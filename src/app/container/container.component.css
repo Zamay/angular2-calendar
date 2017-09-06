@@ -1,5 +1,4 @@
 body {
-  /*border: 1px solid #212941;*/
   border-radius: 3px;
 }
 .grid {
@@ -41,7 +40,4 @@ body {
       "calendar to-do"
   }
 }
-._cal {
-  display: grid;
-  /*justify-content: center;  */
-}
+

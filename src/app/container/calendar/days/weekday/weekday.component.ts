@@ -32,16 +32,18 @@ export class WeekdayComponent implements OnInit, OnDestroy {
     //   .subscribe(value => this.showModal = value);
   }
 
-  public getStyle(item: any) {
+  public getStyle(type: any) {
     // TODO: Проверка на прошедший день и месяц
-    return item.type;
+
+    if (type === 'current') {
+      return 'activeDate';
+    }
+    return type;
   }
 
   public addNote(e: any) {
     this.selectedDay = e.target.innerText;
     const className  = e.target.className;
-
-    // console.log(this.thisMonth);
 
     // Отображение в header даты
     this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(this.selectedDay))
@@ -54,7 +56,6 @@ export class WeekdayComponent implements OnInit, OnDestroy {
 
       // this.showModal = true;
     }
-
 
     // переход на пред и след мусяци при надатии на дату
     if ( className === 'tomorrow') {
