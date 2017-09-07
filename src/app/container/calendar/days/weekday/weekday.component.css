@@ -10,8 +10,8 @@
   align-self: center;
   cursor: pointer
 }
-._day:hover {
-  background-color: blueviolet;
+._day:hover, ._day:active {
+  background-color: #0DAD83;
   border-radius: 50%;
   width: 40px;
   height: 14px;
@@ -25,16 +25,25 @@
   color: #c0c0c0;
 }
 
-.current {
-  font-size: 1.5em;
-}
-
 .activeDate {
-  /*background-color: blueviolet;*/
-  /*border-radius: 50%;*/
-  /*width: 40px;*/
-  /*height: 14px;*/
-  /*line-height: 16px;*/
-  /*margin-left: 8px;*/
+  background-color: #0DAD83;
+  border-radius: 50%;
+  width: 40px;
+  height: 14px;
+  line-height: 16px;
+  transition: 0.5s all;
+  margin-left: 8px;
+  color: #ffffff;
 }
 
+.num_notes {
+  position: absolute;
+  z-index: 3;
+  font-size: 12px;
+  background-color: blueviolet;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 10px 0 0 0;
+  line-height: 22px;
+}

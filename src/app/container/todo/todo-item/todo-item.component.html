@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="todo-item" [class.completed]="todo.completed">
-    <button class="checkbox icon" (click)="toggle()">
+<div class="todo-item" [class.completed]="todo.completed" *ngIf="todo">
+    <button class="checkbox icon" (click)="onToggle()">
         <i class="material-icons" [innerText]="todo.completed? 'check_box': 'check_box_outline_blank'"></i>
     </button>
 
@@ -12,4 +12,8 @@
             <i class="material-icons">delete</i>
         </button>
     </div>
+</div>
+
+<div class="todo-item" *ngIf="!todo">
+  <span class="title">Нет заметок на жтот день</span>
 </div>

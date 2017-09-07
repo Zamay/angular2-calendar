@@ -1,22 +1,25 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Todo } from "../../shared/todo";
+
+import { ShareableStreamStoreService } from "../../services/shareable-stream-store.service";
 @Component({
-    moduleId: module.id,
-    selector: 'app-todo-item',
-    templateUrl: 'todo-item.component.html',
-    styleUrls: ['todo-item.component.css']
+  moduleId: module.id,
+  selector: 'app-todo-item',
+  templateUrl: 'todo-item.component.html',
+  styleUrls: ['todo-item.component.css']
 })
 
 export class TodoItemComponent {
-    // todo - это свойство !
-    @Input() todo: Todo;
-    @Output() delete = new EventEmitter();
+  @Input()  todo: any;
+  @Output() delete = new EventEmitter();
 
-    public toggle() {
-        this.todo.completed = !this.todo.completed;
-    }
+  constructor(private shareableStreamStoreService: ShareableStreamStoreService) { }
 
-    public onDelete() {
-        this.delete.emit(this.todo);
-    }
+  public onToggle() {
+    this.todo.completed = !this.todo.completed;
+    this.shareableStreamStoreService.emit('toggle' , this.todo.completed);
+  }
+
+  public onDelete() {
+    this.delete.emit(this.todo);
+  }
 }

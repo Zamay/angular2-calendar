@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Todo}  from '../shared/todo';
-import {todos} from '../shared/data';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-todo',
@@ -8,13 +6,5 @@ import {todos} from '../shared/data';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent {
-
-  todos: Todo[] = todos;
-
-  public create(title: string) {
-    const todo = new Todo(title);
-    this.todos.push(todo);
-
-  }
 
 }

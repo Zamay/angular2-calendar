@@ -20,8 +20,8 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   public selectedDay:  any;
   public notes: any;
   constructor(
-    private dateServive: DateService,
-    private todoServive: TodoService,
+    private dateService: DateService,
+    private todoService: TodoService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) {
     this.todoForm = new FormGroup({
@@ -29,16 +29,17 @@ export class TodoFormComponent implements OnInit, OnDestroy {
         Validators.required
       ])
     });
-    this.selectedDay = this.dateServive.currSelecDay();
+    this.selectedDay = this.dateService.currSelecDay();
+    this.notes = this.todoService.getNotesDay(this.selectedDay) || [];
   }
 
   ngOnInit() {
     this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
       .asObservable()
-      .subscribe(value => this.selectedDay = value);
-
-    this.notes = this.todoServive.getNotesDay(this.selectedDay) || [];
-
+      .subscribe(value => {
+        this.selectedDay = value;
+        this.notes = this.todoService.getNotesDay(value) || [];
+      });
   }
 
   public onSubmit() {
@@ -50,8 +51,8 @@ export class TodoFormComponent implements OnInit, OnDestroy {
       'time': time,
       'completed': false
     });
-
-    this.shareableStreamStoreService.emit('notes' , this.todoServive.setNotesDay(this.selectedDay, JSON.stringify(this.notes)));
+    this.shareableStreamStoreService.emit('notes' ,
+      this.todoService.setNotesDay(this.selectedDay, JSON.stringify(this.notes)));
   }
 
   ngOnDestroy() {

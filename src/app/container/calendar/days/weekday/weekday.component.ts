@@ -27,17 +27,10 @@ export class WeekdayComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.thisMonth = this.dateServive.showCurrMonth();
     this.items = this.thisMonth[3][this.numWeek];
-    // this.subscription = this.shareableStreamStoreService.getStream('closeModal')
-    //   .asObservable()
-    //   .subscribe(value => this.showModal = value);
   }
 
   public getStyle(type: any) {
     // TODO: Проверка на прошедший день и месяц
-
-    if (type === 'current') {
-      return 'activeDate';
-    }
     return type;
   }
 
@@ -46,16 +39,7 @@ export class WeekdayComponent implements OnInit, OnDestroy {
     const className  = e.target.className;
 
     // Отображение в header даты
-    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(this.selectedDay))
-
-
-    // проверка дней этого месяца
-    if (className === 'today' || className === 'current') {
-      let dmy = localStorage.getItem(this.selectedDay+'/'+this.thisMonth[0]+'/'+this.thisMonth[1]);
-      (dmy) ? this.noteDay = dmy : this.noteDay = false ;
-
-      // this.showModal = true;
-    }
+    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(this.selectedDay));
 
     // переход на пред и след мусяци при надатии на дату
     if ( className === 'tomorrow') {
