@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DateService} from "../../services/date.service";
 import {ShareableStreamStoreService} from "../../services/shareable-stream-store.service";
 import {Subscription} from "rxjs/Subscription";
+import {TodoService} from "../../services/todo.service";
 
 @Component({
   moduleId: module.id,
@@ -17,9 +18,10 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   public todoForm:     FormGroup;
   public subscription: Subscription;
   public selectedDay:  any;
-
+  public notes: any;
   constructor(
     private dateServive: DateService,
+    private todoServive: TodoService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) {
     this.todoForm = new FormGroup({
@@ -34,13 +36,22 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
       .asObservable()
       .subscribe(value => this.selectedDay = value);
+
+    this.notes = this.todoServive.getNotesDay(this.selectedDay) || [];
+
   }
 
   public onSubmit() {
-    console.log(this.selectedDay);
-    localStorage.setItem(this.selectedDay[2] + '/' + this.selectedDay[1] + '/' + this.selectedDay[3], this.todoForm.value.title);
+    let date = new Date();
+    let time = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
 
-    // this.add.emit(this.todoForm.value);
+    this.notes.push({
+      'title': this.todoForm.value.title,
+      'time': time,
+      'completed': false
+    });
+
+    this.shareableStreamStoreService.emit('notes' , this.todoServive.setNotesDay(this.selectedDay, JSON.stringify(this.notes)));
   }
 
   ngOnDestroy() {
