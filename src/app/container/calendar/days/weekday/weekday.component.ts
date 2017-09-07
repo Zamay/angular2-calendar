@@ -34,20 +34,9 @@ export class WeekdayComponent implements OnInit, OnDestroy {
     return type;
   }
 
-  public addNote(e: any) {
-    this.selectedDay = e.target.innerText;
-    const className  = e.target.className;
-
-    // Отображение в header даты
-    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(this.selectedDay));
-
-    // переход на пред и след мусяци при надатии на дату
-    if ( className === 'tomorrow') {
-      this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
-    }
-    if (className === 'yesterday') {
-      this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.previousMonth());
-    }
+  public selectDay(item: any) {
+    // Отображение в header даты + выбор даты
+    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day));
   }
 
   ngOnDestroy() {

@@ -1,6 +1,9 @@
 <div class="_weekday">
-  <span class="_day" *ngFor="let item of items" [ngClass]="{'activeDate': item.type == 'current'}">
-    <span [ngClass]=getStyle(item.type) (click)="addNote($event)">{{item['day']}}</span>
+  <span class="_day"
+        *ngFor="let item of items"
+        [ngClass]="{'activeDate': item.type == 'current'}"
+        (click)="selectDay(item)"> {{item['day']}}
+
     <span [ngClass]="{'num_notes': item.type == 'current'}">3</span>
   </span>
 </div>
