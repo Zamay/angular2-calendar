@@ -17,13 +17,11 @@ declare var $: any;
 export class WeekdayComponent implements OnInit, OnDestroy {
 
   @Input() numWeek:     any;
-  @ViewChild('selDay')  selDay;
+
   public   items:       any;
   public   selectedDay: any;
   public   dayMonYear:  any;
   public   showNotes:   any;
-  public selectedIndex: any;
-  selectedWeekIndex: any
   public subscription: Subscription;
   constructor(
     private dateServive: DateService,
@@ -50,17 +48,12 @@ export class WeekdayComponent implements OnInit, OnDestroy {
 
 
 
-  public selectDay(item: any, i: number) {
-
-    this.selectedIndex = 7 * (this.numWeek + 1) + (i + 1);
-
-    console.log($('#tabs'));
-
+  public selectDay(item: any) {
+    // TODO: Переписать без jQuery
     $('#tabs').on('click', '._day', function(){
       $('#tabs ._day').removeClass('activeDate');
       $(this).addClass('activeDate');
     });
-
 
     // выбор даты
     this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day));

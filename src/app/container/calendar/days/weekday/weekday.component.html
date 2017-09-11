@@ -1,7 +1,7 @@
 <div class="_weekday">
   <div class="_day"
         *ngFor="let item of items; let i=index"
-        [ngClass]="{'activeDate': selectedIndex === 7 * (numWeek + 1) + (i + 1)}"
+        [ngClass]="{'activeDate': item.type === 'current'}"
         (click)="selectDay(item, i)"> {{item['day']}}
 
     <span class="num_notes" *ngIf="item.type == 'current'">2</span>

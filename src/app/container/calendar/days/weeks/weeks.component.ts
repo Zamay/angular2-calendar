@@ -21,7 +21,6 @@ export class WeeksComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.weeks = this.dateServive.showCurrMonth()[3];
 
-    console.log(this.weeks);
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => this.weeks = value[2]);
