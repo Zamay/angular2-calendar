@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
-import {Subscription} from "rxjs/Subscription";
+import { Subscription }                from "rxjs/Subscription";
 
 @Component({
   selector: 'app-weeks',

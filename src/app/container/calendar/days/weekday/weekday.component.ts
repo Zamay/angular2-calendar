@@ -56,7 +56,7 @@ export class WeekdayComponent implements OnInit, OnDestroy {
     });
 
     // выбор даты
-    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day));
+    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay));
   }
 
   ngOnDestroy() {

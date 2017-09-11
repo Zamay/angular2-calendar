@@ -1,4 +1,12 @@
 <form class="todo-form" [formGroup]="todoForm" (ngSubmit)="onSubmit(); todoForm.reset()" >
-    <input type="text" name="title" class="form-control" formControlName="title" placeholder="Что нужно сделать?" required>
+    <input type="text"
+           name="title"
+           class="form-control"
+           formControlName="title"
+           required
+           autofocus
+           [attr.disabled]="passDay?'':null"
+           [attr.placeholder]="passDay?'Прошедший день':'Что нужно сделать'"
+    >
     <button type="submit" [disabled]="todoForm.invalid">Добавить</button>
 </form>

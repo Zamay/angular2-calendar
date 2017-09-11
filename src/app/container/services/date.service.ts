@@ -5,11 +5,11 @@ import {DAYS, MONTHS} from '../shared/cal.data';
 @Injectable()
 export class DateService {
   public Months: Array<string> = MONTHS;
-  public Days: Array<any> = DAYS;
+  public Days:   Array<any> = DAYS;
   public currMonth: number;
   public currYear: number;
   public currDay: number;
-
+  public passDays: boolean = true;
   constructor() {
     this.totalDate();
   }
@@ -44,17 +44,18 @@ export class DateService {
   }
 
   public showCurrMonth() {
+    this.passDays = true;
     const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
     return [this.currDay, this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
   public currSelecDay() {
-    return this.selectedDay(this.currDay);
+    return this.selectedDay(this.currDay, '');
   }
 
-  public selectedDay(day: number) {
+  public selectedDay(day: number, item: any) {
     const weekDay = this.Days[new Date(this.currYear, this.currMonth, day).getUTCDay()].long;
-    return [weekDay, this.Months[this.currMonth], day, this.currYear];
+    return [weekDay, this.Months[this.currMonth], day, this.currYear, item];
   }
 
   // получение даты
@@ -86,16 +87,29 @@ export class DateService {
           k++;
         }
       }
-
+// debugger
+//       console.log('1')
       let chk   = new Date();
       let chkY  = chk.getFullYear();
       let chkM  = chk.getMonth();
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
+        this.passDays = false;
         obj = {
           day: i,
           month: this.currMonth,
           year: this.currYear,
-          type: 'current'
+          type: 'current',
+          passDay: false
+        };
+        arr.push(obj);
+      }
+      if (this.passDays) {
+        obj = {
+          day: i,
+          month: this.currMonth,
+          year: this.currYear,
+          type: 'today',
+          passDay: true
         };
         arr.push(obj);
       } else {
@@ -103,7 +117,8 @@ export class DateService {
           day: i,
           month: this.currMonth,
           year: this.currYear,
-          type: 'today'
+          type: 'today',
+          passDay: false
         };
         arr.push(obj);
       }

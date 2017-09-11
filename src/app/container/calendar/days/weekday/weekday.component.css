@@ -11,7 +11,7 @@
   cursor: pointer
 }
 ._day:hover {
-  background-color: #0DAD83;
+  background-color: #4adcb5;
   border-radius: 50%;
   width: 40px;
   height: 14px;
@@ -46,4 +46,8 @@
   height: 20px;
   margin: 10px 0 0 0;
   line-height: 22px;
+}
+
+.passDay {
+  color: #c5c0c0;
 }

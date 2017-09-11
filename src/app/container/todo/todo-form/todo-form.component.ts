@@ -18,7 +18,8 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   public todoForm:     FormGroup;
   public subscription: Subscription;
   public selectedDay:  any;
-  public notes: any;
+  public passDay:      boolean;
+  public notes:        any;
   constructor(
     private dateService: DateService,
     private todoService: TodoService,
@@ -37,6 +38,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
       .asObservable()
       .subscribe(value => {
+        this.passDay = value[4]
         this.selectedDay = value;
         this.notes = this.todoService.getNotesDay(value) || [];
       });
