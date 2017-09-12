@@ -41,13 +41,6 @@ export class WeekdayComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getStyle(type: any) {
-    // TODO: Проверка на прошедший день и месяц
-    return type;
-  }
-
-
-
   public selectDay(item: any) {
     // TODO: Переписать без jQuery
     $('#tabs').on('click', '._day', function(){

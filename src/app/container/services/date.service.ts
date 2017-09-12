@@ -5,11 +5,12 @@ import {DAYS, MONTHS} from '../shared/cal.data';
 @Injectable()
 export class DateService {
   public Months: Array<string> = MONTHS;
-  public Days:   Array<any> = DAYS;
+  public Days: Array<any> = DAYS;
   public currMonth: number;
   public currYear: number;
   public currDay: number;
   public passDays: boolean = true;
+
   constructor() {
     this.totalDate();
   }
@@ -66,8 +67,8 @@ export class DateService {
       lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
     const arrs = [];
-    let   arr  = [];
-    let   obj  = {};
+    let arr = [];
+    let obj = {};
 
     let i = 1;
     do {
@@ -75,7 +76,7 @@ export class DateService {
 
       if (dow === 0) {
         arr = [];
-      } else if ( i === 1 ) {
+      } else if (i === 1) {
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
         for (let j = 0; j < firstDayOfMonth; j++) {
           // obj = {
@@ -89,9 +90,9 @@ export class DateService {
       }
 // debugger
 //       console.log('1')
-      let chk   = new Date();
-      let chkY  = chk.getFullYear();
-      let chkM  = chk.getMonth();
+      let chk = new Date();
+      let chkY = chk.getFullYear();
+      let chkM = chk.getMonth();
       // ГОВНОКОД !!!
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
         this.passDays = false;
@@ -103,8 +104,7 @@ export class DateService {
           passDay: false
         };
         arr.push(obj);
-      }
-      if (chkY === this.currYear && chkM === this.currMonth) {
+      } else if (chkY === this.currYear && chkM === this.currMonth) {
         if (i < this.currDay) {
           obj = {
             day: i,
@@ -125,7 +125,7 @@ export class DateService {
           arr.push(obj);
         }
       } else {
-        if (chkM >= this.currMonth ) {
+        if (chkM >= this.currMonth) {
           obj = {
             day: i,
             month: this.currMonth,
@@ -149,7 +149,7 @@ export class DateService {
 
       if (dow === 6) {
         arrs.push(arr);
-      } else if (i === lastDateOfMonth ) {
+      } else if (i === lastDateOfMonth) {
         let k = 1;
         for (dow; dow < 6; dow++) {
           // obj = {
