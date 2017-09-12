@@ -38,6 +38,7 @@
 
 .num_notes {
   position: absolute;
+  color: #ffffff;
   z-index: 3;
   font-size: 12px;
   background-color: blueviolet;

@@ -17,6 +17,7 @@ declare var $: any;
 export class WeekdayComponent implements OnInit, OnDestroy {
 
   @Input() numWeek:     any;
+  @Input() arrNotes:    any;
 
   public   items:       any;
   public   selectedDay: any;
@@ -34,11 +35,6 @@ export class WeekdayComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dayMonYear = this.dateServive.showCurrMonth();
     this.items = this.dayMonYear[3][this.numWeek];
-
-    for (let i of this.items) {
-      this.showNotes = this.todoService.getNotesDay(['', this.dayMonYear[1], i.day, i.year]);
-
-    }
   }
 
   public selectDay(item: any) {

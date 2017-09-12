@@ -4,6 +4,9 @@
         [ngClass]="{'activeDate': item.type === 'current', 'passDay': item.passDay == true}"
         (click)="selectDay(item)"> {{item['day']}}
 
-    <span class="num_notes" *ngIf="item.type == 'current'">2</span>
+    <span *ngFor=" let note of arrNotes">
+      <span class="num_notes" *ngIf="note.day == item['day']">{{note.notes.length}}</span>
+    </span>
+
   </div>
 </div>
