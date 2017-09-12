@@ -92,6 +92,7 @@ export class DateService {
       let chk   = new Date();
       let chkY  = chk.getFullYear();
       let chkM  = chk.getMonth();
+      // ГОВНОКОД !!!
       if (chkY === this.currYear && chkM === this.currMonth && i === this.currDay) {
         this.passDays = false;
         obj = {
@@ -103,25 +104,48 @@ export class DateService {
         };
         arr.push(obj);
       }
-      if (this.passDays) {
-        obj = {
-          day: i,
-          month: this.currMonth,
-          year: this.currYear,
-          type: 'today',
-          passDay: true
-        };
-        arr.push(obj);
+      if (chkY === this.currYear && chkM === this.currMonth) {
+        if (i < this.currDay) {
+          obj = {
+            day: i,
+            month: this.currMonth,
+            year: this.currYear,
+            type: 'today',
+            passDay: true
+          };
+          arr.push(obj);
+        } else {
+          obj = {
+            day: i,
+            month: this.currMonth,
+            year: this.currYear,
+            type: 'today',
+            passDay: false
+          };
+          arr.push(obj);
+        }
       } else {
-        obj = {
-          day: i,
-          month: this.currMonth,
-          year: this.currYear,
-          type: 'today',
-          passDay: false
-        };
-        arr.push(obj);
+        if (chkM >= this.currMonth ) {
+          obj = {
+            day: i,
+            month: this.currMonth,
+            year: this.currYear,
+            type: 'today',
+            passDay: true
+          };
+          arr.push(obj);
+        } else {
+          obj = {
+            day: i,
+            month: this.currMonth,
+            year: this.currYear,
+            type: 'today',
+            passDay: false
+          };
+          arr.push(obj);
+        }
       }
+
 
       if (dow === 6) {
         arrs.push(arr);
