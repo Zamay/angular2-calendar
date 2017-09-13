@@ -1,8 +1,11 @@
 <div class="_weekday">
   <div class="_day"
-        *ngFor="let item of items"
-        [ngClass]="{'activeDate': item.type === 'current', 'passDay': item.passDay == true}"
-        (click)="selectDay(item)"> {{item['day']}}
+        *ngFor="let item of items; let i = index"
+        [ngClass]="{'current': item.type === 'current',
+                    'passDay': item.passDay == true,
+                    'activeDate': daysOfMonth[7*numWeek + i].active === true
+                    }"
+        (click)="selectDay(item)">{{item['day']}}
 
     <span *ngFor=" let note of arrNotes">
       <span class="num_notes" *ngIf="note.day == item['day']">{{note.notes.length}}</span>

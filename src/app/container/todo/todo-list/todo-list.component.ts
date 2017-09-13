@@ -32,7 +32,7 @@ export class TodoListCOmponent implements OnInit, OnDestroy {
     this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
       .asObservable()
       .subscribe(value => {
-        console.log(value);
+        // console.log(value);
         this.selectedDay = value;
           this.todos = this.todoService.getNotesDay(value) || [];
         }

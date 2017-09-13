@@ -18,6 +18,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
   public day:           any;
   public showNotes:     any;
   public arrNotes:      any;
+  public daysOfMonth:      any;
   constructor(
     private dateServive: DateService,
     private todoService: TodoService,
@@ -54,6 +55,8 @@ export class WeeksComponent implements OnInit, OnDestroy {
 
   public showNote(month) {
     this.arrNotes = [];
+    this.daysOfMonth = [];
+    let dayOfMonth = {};
     for (let item = 0; item < this.weeks.length; item++) {
       for (let i of this.weeks[item]) {
         let notes = this.todoService.getNotesDay(['', month, i.day, i.year])
@@ -66,8 +69,15 @@ export class WeeksComponent implements OnInit, OnDestroy {
           };
           this.arrNotes.push(this.showNotes);
         }
+
+        dayOfMonth = {
+          day: i.day,
+          active: false
+        };
+        this.daysOfMonth.push(dayOfMonth);
       }
     }
+    console.log(this.daysOfMonth);
   }
 
   ngOnDestroy() {

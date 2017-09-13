@@ -14,20 +14,17 @@ declare var $: any;
   templateUrl: './weekday.component.html',
   styleUrls: ['./weekday.component.css']
 })
-export class WeekdayComponent implements OnInit, OnDestroy {
+export class WeekdayComponent implements OnInit {
 
   @Input() numWeek:     any;
   @Input() arrNotes:    any;
+  @Input() daysOfMonth: any;
 
   public   items:       any;
   public   selectedDay: any;
   public   dayMonYear:  any;
-  public   showNotes:   any;
-  public subscription: Subscription;
   constructor(
     private dateServive: DateService,
-    private todoService: TodoService,
-    private elementRef: ElementRef,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) {
   }
@@ -38,18 +35,19 @@ export class WeekdayComponent implements OnInit, OnDestroy {
   }
 
   public selectDay(item: any) {
-    // TODO: Переписать без jQuery
-    $('#tabs').on('click', '._day', function(){
-      $('#tabs ._day').removeClass('activeDate');
-      $(this).addClass('activeDate');
-    });
+    // текущено дню добавить класс activeDate
+    for (let obj of this.daysOfMonth) {
+      if (obj.active === true ) {
+        obj.active = false;
+      }
+
+      if ( item.day === obj.day) {
+        obj.active = true;
+      }
+    }
 
     // выбор даты
-    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay));
-  }
-
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay) );
   }
 
 }
