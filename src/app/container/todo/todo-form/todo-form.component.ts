@@ -1,25 +1,31 @@
-import {Component, Output, EventEmitter, OnInit, OnDestroy} from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DateService} from "../../services/date.service";
-import {ShareableStreamStoreService} from "../../services/shareable-stream-store.service";
-import {Subscription} from "rxjs/Subscription";
-import {TodoService} from "../../services/todo.service";
+import { Component,
+         Output,
+         EventEmitter,
+         OnInit,
+         OnDestroy }    from '@angular/core';
+import { FormControl,
+         FormGroup,
+         Validators }   from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
+import { DateService }                 from '../../services/date.service';
+import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
+import { TodoService }                 from '../../services/todo.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-todo-form',
+  selector:    'app-todo-form',
   templateUrl: 'todo-form.component.html',
-  styleUrls: ['todo-form.component.css']
+  styleUrls:   ['todo-form.component.css']
 })
 
 export class TodoFormComponent implements OnInit, OnDestroy {
 
-  @Output() add = new EventEmitter();
   public todoForm:     FormGroup;
   public subscription: Subscription;
   public selectedDay:  any;
-  public passDay:      boolean;
   public notes:        any;
+  public passDay:      boolean;
   constructor(
     private dateService: DateService,
     private todoService: TodoService,
@@ -38,15 +44,15 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
       .asObservable()
       .subscribe(value => {
-        this.passDay = value[4]
+        this.passDay = value[4];
         this.selectedDay = value;
         this.notes = this.todoService.getNotesDay(value) || [];
       });
   }
 
   public onSubmit() {
-    let date = new Date();
-    let time = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+    const date = new Date();
+    const time = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
 
     this.notes.push({
       'title': this.todoForm.value.title,

@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component,
+        OnDestroy,
+        OnInit }             from '@angular/core';
+import { isNullOrUndefined } from 'util';
+import { Subscription }      from 'rxjs/Subscription';
 
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
-import { Subscription }                from 'rxjs/Subscription';
-import {TodoService} from "../../../services/todo.service";
-import {isNullOrUndefined} from "util";
+import { TodoService }                 from '../../../services/todo.service';
 
 @Component({
   selector: 'app-weeks',
@@ -58,8 +60,8 @@ export class WeeksComponent implements OnInit, OnDestroy {
     this.daysOfMonth = [];
     let dayOfMonth = {};
     for (let item = 0; item < this.weeks.length; item++) {
-      for (let i of this.weeks[item]) {
-        let notes = this.todoService.getNotesDay(['', month, i.day, i.year])
+      for (const i of this.weeks[item]) {
+        const notes = this.todoService.getNotesDay(['', month, i.day, i.year]);
         if (notes !== null) {
           this.showNotes = {
             day: i.day,
@@ -81,7 +83,8 @@ export class WeeksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (isNullOrUndefined )
-    this.subscription.unsubscribe();
+    if (isNullOrUndefined ) {
+      this.subscription.unsubscribe();
+    }
   }
 }

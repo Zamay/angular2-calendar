@@ -1,13 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,
+         OnDestroy,
+         OnInit }       from '@angular/core';
 import { Observable }   from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ShareableStreamStoreService }  from '../services/shareable-stream-store.service';
 import { DateService }                  from '../services/date.service';
 @Component({
-  selector: 'app-header',
+  selector:    'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls:   ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 

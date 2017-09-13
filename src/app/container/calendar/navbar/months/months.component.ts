@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit}   from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription }                 from 'rxjs/Subscription';
 
 import { DateService }                  from '../../../services/date.service';
 import { ShareableStreamStoreService }  from '../../../services/shareable-stream-store.service';
-import { MONTHS }                       from "../../../shared/cal.data";
 
 @Component({
   selector: 'app-months',
@@ -11,7 +10,6 @@ import { MONTHS }                       from "../../../shared/cal.data";
   styleUrls: ['./months.component.css']
 })
 export class MonthsComponent implements OnInit, OnDestroy {
-  public MONTHS: Array<any> = MONTHS;
   public currMonth:     Array<any>;
   public subscription:  Subscription;
   constructor(
@@ -23,7 +21,6 @@ export class MonthsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'selectedDay'];
-
 
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()

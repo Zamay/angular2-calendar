@@ -1,11 +1,14 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component,
+         Input,
+         Output,
+         EventEmitter }                from '@angular/core';
 
-import { ShareableStreamStoreService } from "../../services/shareable-stream-store.service";
+import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
 @Component({
   moduleId: module.id,
-  selector: 'app-todo-item',
+  selector:    'app-todo-item',
   templateUrl: 'todo-item.component.html',
-  styleUrls: ['todo-item.component.css']
+  styleUrls:   ['todo-item.component.css']
 })
 
 export class TodoItemComponent {

@@ -2,7 +2,7 @@
 
     <app-todo-item *ngFor="let todo of todos"
                    [todo]="todo"
-                   (delete)="delete($event)">
+                   (delete)="onDelete($event)">
     </app-todo-item>
 
 </div>

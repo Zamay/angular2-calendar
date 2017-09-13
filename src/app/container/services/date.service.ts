@@ -1,15 +1,15 @@
-import {Injectable}   from '@angular/core';
+import { Injectable }   from '@angular/core';
 
-import {DAYS, MONTHS} from '../shared/cal.data';
+import { DAYS, MONTHS } from '../shared/cal.data';
 
 @Injectable()
 export class DateService {
-  public Months: Array<string> = MONTHS;
-  public Days: Array<any> = DAYS;
+  public Months:    Array<string> = MONTHS;
+  public Days:      Array<any>    = DAYS;
   public currMonth: number;
-  public currYear: number;
-  public currDay: number;
-  public passDays: boolean = true;
+  public currYear:  number;
+  public currDay:   number;
+  public passDays:  boolean = true;
 
   constructor() {
     this.totalDate();

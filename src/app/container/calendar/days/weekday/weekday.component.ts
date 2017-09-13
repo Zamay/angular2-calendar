@@ -1,18 +1,13 @@
-import { Component,  ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, Input, OnInit}     from '@angular/core';
 
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
-import { TodoService }                 from "../../../services/todo.service";
 
-
-declare var jquery: any;
-declare var $: any;
 
 @Component({
-  selector: 'app-weekday',
+  selector:    'app-weekday',
   templateUrl: './weekday.component.html',
-  styleUrls: ['./weekday.component.css']
+  styleUrls:   ['./weekday.component.css']
 })
 export class WeekdayComponent implements OnInit {
 
@@ -36,7 +31,7 @@ export class WeekdayComponent implements OnInit {
 
   public selectDay(item: any) {
     // текущено дню добавить класс activeDate
-    for (let obj of this.daysOfMonth) {
+    for (const obj of this.daysOfMonth) {
       if (obj.active === true ) {
         obj.active = false;
       }
