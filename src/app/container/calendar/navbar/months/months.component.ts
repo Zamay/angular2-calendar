@@ -39,6 +39,10 @@ export class MonthsComponent implements OnInit, OnDestroy {
     this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
   }
 
+  public selectedMonth() {
+    this.shareableStreamStoreService.emit('selectedMonth', this.dateServive.getMonth())
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

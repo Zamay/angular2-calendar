@@ -9,18 +9,18 @@ import { ShareableStreamStoreService } from '../../../services/shareable-stream-
 import { TodoService }                 from '../../../services/todo.service';
 
 @Component({
-  selector: 'app-weeks',
+  selector:    'app-weeks',
   templateUrl: './weeks.component.html',
-  styleUrls: ['./weeks.component.css']
+  styleUrls:   ['./weeks.component.css']
 })
 export class WeeksComponent implements OnInit, OnDestroy {
 
-  public weeks: any;
-  public subscription:  Subscription;
+  public weeks:         any;
   public day:           any;
   public showNotes:     any;
   public arrNotes:      any;
-  public daysOfMonth:      any;
+  public daysOfMonth:   any;
+  public subscription:  Subscription;
   constructor(
     private dateServive: DateService,
     private todoService: TodoService,

@@ -15,6 +15,7 @@ export class WeekdayComponent implements OnInit {
   @Input() arrNotes:    any;
   @Input() daysOfMonth: any;
 
+  public   months:      any;
   public   items:       any;
   public   selectedDay: any;
   public   dayMonYear:  any;
@@ -27,6 +28,11 @@ export class WeekdayComponent implements OnInit {
   ngOnInit() {
     this.dayMonYear = this.dateServive.showCurrMonth();
     this.items = this.dayMonYear[3][this.numWeek];
+
+    // console.log(this.items);
+    // console.log(this.dateServive.getMonth()[this.numWeek]);
+    this.months = this.dateServive.getMonth();
+    console.log(this.months);
   }
 
   public selectDay(item: any) {
@@ -44,5 +50,4 @@ export class WeekdayComponent implements OnInit {
     // выбор даты
     this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay) );
   }
-
 }
