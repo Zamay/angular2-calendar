@@ -88,7 +88,7 @@ export class DateService {
           k++;
         }
       }
-// debugger
+
 //       console.log('1')
       let chk = new Date();
       let chkY = chk.getFullYear();
@@ -145,7 +145,6 @@ export class DateService {
           arr.push(obj);
         }
       }
-
 
       if (dow === 6) {
         arrs.push(arr);

@@ -29,8 +29,6 @@ export class WeekdayComponent implements OnInit {
     this.dayMonYear = this.dateServive.showCurrMonth();
     this.items = this.dayMonYear[3][this.numWeek];
 
-    // console.log(this.items);
-    // console.log(this.dateServive.getMonth()[this.numWeek]);
     this.months = this.dateServive.getMonth();
     console.log(this.months);
   }
@@ -38,7 +36,7 @@ export class WeekdayComponent implements OnInit {
   public selectDay(item: any) {
     // текущено дню добавить класс activeDate
     for (const obj of this.daysOfMonth) {
-      if (obj.active === true ) {
+      if (obj.active) {
         obj.active = false;
       }
 
