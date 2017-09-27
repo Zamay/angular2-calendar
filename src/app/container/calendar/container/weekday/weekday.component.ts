@@ -28,11 +28,6 @@ export class WeekdayComponent implements OnInit {
   ngOnInit() {
     this.dayMonYear = this.dateServive.showCurrMonth();
     this.items = this.dayMonYear[3][this.numWeek];
-
-    // console.log(this.items);
-    // console.log(this.dateServive.getMonth()[this.numWeek]);
-    this.months = this.dateServive.getMonth();
-    console.log(this.months);
   }
 
   public selectDay(item: any) {

@@ -8,7 +8,7 @@ import { TodoModule }         from './todo/todo.module';
 
 import { DateService }                 from './services/date.service';
 import { ShareableStreamStoreService } from './services/shareable-stream-store.service';
-import { TodoService }                 from './services/todo.service';
+import { LocalStorageService }                 from './services/local-storage-service.service';
 
 
 @NgModule({
@@ -20,6 +20,6 @@ import { TodoService }                 from './services/todo.service';
   ],
   declarations: [ContainerComponent],
   exports:      [ContainerComponent],
-  providers:    [DateService, ShareableStreamStoreService, TodoService]
+  providers:    [DateService, ShareableStreamStoreService, LocalStorageService]
 })
 export class ContainerModule { }

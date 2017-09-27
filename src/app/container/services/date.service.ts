@@ -1,17 +1,19 @@
 import {Injectable}   from '@angular/core';
 
 import {DAYS, MONTHS} from '../shared/cal.data';
+import {LocalStorageService} from "./local-storage-service.service";
 
 @Injectable()
 export class DateService {
+
   public Months: Array<string> = MONTHS;
   public Days: Array<any> = DAYS;
   public currMonth: number;
   public currYear: number;
   public currDay: number;
   public passDays: boolean = true;
-
-  constructor() {
+  public valueState: any;
+  constructor(private localStorageSer: LocalStorageService) {
     this.totalDate();
   }
 
@@ -20,6 +22,25 @@ export class DateService {
     this.currMonth = d.getMonth();
     this.currYear = d.getFullYear();
     this.currDay = d.getDate();
+
+    if (this.valueState ===  undefined ) {
+      this.valueState = {
+        weeks: {
+          active: true
+        },
+        month: {
+          active: false,
+          number: this.currMonth
+        },
+        year: {
+          active: false,
+          number: this.currYear
+        },
+      };
+
+      this.localStorageSer.setData('selectedMY', this.valueState);
+    }
+
   }
 
   public nextMonth() {
@@ -29,7 +50,7 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth + 1;
     }
-    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
     return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
@@ -40,18 +61,23 @@ export class DateService {
     } else {
       this.currMonth = this.currMonth - 1;
     }
-    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
     return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
   public showCurrMonth() {
     this.passDays = true;
-    const obj_arrDay = this.obj_showDays(this.currYear, this.currMonth);
+    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
     return [this.currDay, this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
   public currSelecDay() {
     return this.selectedDay(this.currDay, '');
+  }
+
+  // +
+  public getNameMonths() {
+    return this.Months;
   }
 
   public selectedDay(day: number, item: any) {
@@ -60,7 +86,8 @@ export class DateService {
   }
 
   // получение даты
-  public obj_showDays(y, m) {
+  public getDaysOfMonth(y, m) {
+    console.log('1');
     const d = new Date(),
       firstDayOfMonth = new Date(y, m, 1).getDay(),
       lastDateOfMonth = new Date(y, m + 1, 0).getDate(),
@@ -167,16 +194,4 @@ export class DateService {
     return arrs;
   }
 
-  public getMonth() {
-    const arrs = [];
-    for (let i = 0; i < 12; i += 3) {
-      let obj = {
-        day: this.Months.slice(i, i + 3),
-        passdaY: false,
-        type: 'today'
-      }
-      arrs.push(obj);
-    }
-    return arrs;
-  }
 }

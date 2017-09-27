@@ -2,14 +2,11 @@ import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CalendarComponent } from './calendar.component';
-import { DaysModule }        from './days/days.module';
-import { NavbarModule }      from './navbar/navbar.module';
-
+import { ContainerModule }   from './container/container.module';
 @NgModule({
   imports: [
     CommonModule,
-    NavbarModule,
-    DaysModule,
+    ContainerModule,
   ],
   declarations: [CalendarComponent],
   exports:      [CalendarComponent]

@@ -5,7 +5,7 @@ import { Subscription }      from 'rxjs/Subscription';
 import { isNullOrUndefined } from 'util';
 
 import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
-import { TodoService }                 from '../../services/todo.service';
+import { LocalStorageService }                 from '../../services/local-storage-service.service';
 import { DateService }                 from '../../services/date.service';
 
 @Component({
@@ -23,11 +23,11 @@ export class TodoListCOmponent implements OnInit, OnDestroy {
 
   constructor(
     private shareableStreamStoreService: ShareableStreamStoreService,
-    private todoService: TodoService,
+    private todoService: LocalStorageService,
     private dateService: DateService
   ) {
     this.selectedDay = this.dateService.currSelecDay();
-    this.todos = this.todoService.getNotesDay(this.selectedDay) || [];
+    this.todos = this.todoService.getLocalStorage(this.selectedDay) || [];
   }
 
   ngOnInit() {
@@ -37,14 +37,14 @@ export class TodoListCOmponent implements OnInit, OnDestroy {
       .subscribe(value => {
         // console.log(value);
         this.selectedDay = value;
-          this.todos = this.todoService.getNotesDay(value) || [];
+          this.todos = this.todoService.getLocalStorage(value) || [];
         }
       );
 
     // запушить toggle
     this.subscription = this.shareableStreamStoreService.getStream('toggle')
       .asObservable()
-      .subscribe(value => this.todoService.setNotesDay(this.selectedDay, JSON.stringify(this.todos)));
+      .subscribe(value => this.todoService.setLocalStorage(this.selectedDay, JSON.stringify(this.todos)));
 
     // получить заметку
     this.subscription = this.shareableStreamStoreService.getStream('notes')
@@ -59,7 +59,7 @@ export class TodoListCOmponent implements OnInit, OnDestroy {
     if (index > -1) {
       this.todos.splice(index, 1);
     }
-    this.todoService.setNotesDay(this.selectedDay, JSON.stringify(this.todos));
+    this.todoService.setLocalStorage(this.selectedDay, JSON.stringify(this.todos));
   }
 
   ngOnDestroy() {

@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { DateService }                 from '../../services/date.service';
 import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
-import { TodoService }                 from '../../services/todo.service';
+import { LocalStorageService }                 from '../../services/local-storage-service.service';
 
 @Component({
   moduleId: module.id,
@@ -28,7 +28,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   public passDay:      boolean;
   constructor(
     private dateService: DateService,
-    private todoService: TodoService,
+    private todoService: LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) {
     this.todoForm = new FormGroup({
@@ -37,7 +37,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
       ])
     });
     this.selectedDay = this.dateService.currSelecDay();
-    this.notes = this.todoService.getNotesDay(this.selectedDay) || [];
+    this.notes = this.todoService.getLocalStorage(this.selectedDay) || [];
   }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.passDay = value[4];
         this.selectedDay = value;
-        this.notes = this.todoService.getNotesDay(value) || [];
+        this.notes = this.todoService.getLocalStorage(value) || [];
       });
   }
 
@@ -60,7 +60,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
       'completed': false
     });
     this.shareableStreamStoreService.emit('notes' ,
-      this.todoService.setNotesDay(this.selectedDay, JSON.stringify(this.notes)));
+      this.todoService.setLocalStorage(this.selectedDay, JSON.stringify(this.notes)));
   }
 
   ngOnDestroy() {

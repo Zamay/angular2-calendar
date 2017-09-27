@@ -6,12 +6,12 @@ import { Subscription }      from 'rxjs/Subscription';
 
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
-import { TodoService }                 from '../../../services/todo.service';
+import { LocalStorageService }                 from '../../../services/local-storage-service.service';
 
 @Component({
-  selector:    'app-weeks',
-  templateUrl: './weeks.component.html',
-  styleUrls:   ['./weeks.component.css']
+  selector:    'app-week',
+  templateUrl: './week.component.html',
+  styleUrls:   ['./week.component.css']
 })
 export class WeeksComponent implements OnInit, OnDestroy {
 
@@ -23,7 +23,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
   public subscription:  Subscription;
   constructor(
     private dateServive: DateService,
-    private todoService: TodoService,
+    private todoService: LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) { }
 
@@ -61,7 +61,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
     let dayOfMonth = {};
     for (let item = 0; item < this.weeks.length; item++) {
       for (const i of this.weeks[item]) {
-        const notes = this.todoService.getNotesDay(['', month, i.day, i.year]);
+        const notes = this.todoService.getLocalStorage(['', month, i.day, i.year]);
         if (notes !== null) {
           this.showNotes = {
             day: i.day,

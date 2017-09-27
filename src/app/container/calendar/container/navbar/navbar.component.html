@@ -3,7 +3,7 @@
     <button (click)="btnPrev()"><</button>
   </div>
   <div class="_months">
-    <span>{{currMonth[0]}} {{currMonth[1]}}
+    <span (click)="onSelectedMonth()">{{currMonth[0]}} {{currMonth[1]}}
     </span>
   </div>
   <div class="_next">

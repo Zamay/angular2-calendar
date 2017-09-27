@@ -1,7 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 
-import { WeeksComponent } from './weeks.component';
+import { WeeksComponent } from './week.component';
 import { WeekdayModule }  from '../weekday/weekday.module';
 
 @NgModule({
@@ -12,4 +12,4 @@ import { WeekdayModule }  from '../weekday/weekday.module';
   declarations: [WeeksComponent],
   exports:      [WeeksComponent]
 })
-export class WeeksModule { }
+export class WeekModule { }
