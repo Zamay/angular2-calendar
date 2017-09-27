@@ -3,7 +3,13 @@
     <button (click)="btnPrev()"><</button>
   </div>
   <div class="_months">
-    <span (click)="onSelectedMonth()">{{currMonth[0]}} {{currMonth[1]}}
+    <span (click)="onSelectedMonth()">
+      <span *ngIf="showMonth">
+        {{currMonth['month'].number}}
+      </span>
+      <span>
+        {{currMonth['year'].number}}
+      </span>
     </span>
   </div>
   <div class="_next">

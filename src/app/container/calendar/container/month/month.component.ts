@@ -24,21 +24,18 @@ export class MonthComponent implements OnInit {
   }
 
   public selectMonth(item: any) {
-    // номер выбраного месяца
+
     const value = this.localStorageSer.getData('selectedMY');
-    value['month'].number = item;
-    this.localStorageSer.setData('selectedMY', value);
+    value['month'].number = item;  // номер выбраного месяца
 
     // делаем все false => поле year делаем true
     for (const i in value) {
       if (value[i].active === true)
         value[i].active = false;
     }
-    value['weeks'].active = true;
+    value['weeks'].active = true; // делаем отображение компонента
+    this.localStorageSer.setData('selectedMY', value);
 
-    console.log(value);
-
-    //TODO: Сменить сервис
     this.shareableStreamStoreService.emit('selectMonth' ,
       this.dateServive.getDaysOfMonth(value['year'].number, value['month'].number));
     // сменить отображение другого компонента

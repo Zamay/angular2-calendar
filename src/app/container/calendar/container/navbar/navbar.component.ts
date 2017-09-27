@@ -4,6 +4,8 @@ import { Subscription }                 from 'rxjs/Subscription';
 import { DateService }                  from '../../../services/date.service';
 import { ShareableStreamStoreService }  from '../../../services/shareable-stream-store.service';
 import {LocalStorageService} from "../../../services/local-storage-service.service";
+import {MONTHS} from "../../../shared/cal.data";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector:    'app-navbar',
@@ -11,8 +13,9 @@ import {LocalStorageService} from "../../../services/local-storage-service.servi
   styleUrls:   ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  public currMonth:     Array<any>;
-
+  public currMonth: any;
+  public showMonth: boolean = true;
+  public Months: Array<string> = MONTHS;
   public subscription:  Subscription;
   constructor(
     private dateServive: DateService,
@@ -24,8 +27,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'selectedDay'];
-    console.log(this.currMonth);
+    this.currMonth = this.localStorageSer.getData('selectedMY');
+    this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+    // this.currMonth['month'].number = this.Months[this.currMonth['month'].number]
+    // this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'selectedDay'];
+    // console.log(this.currMonth);
+
 
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
@@ -37,7 +44,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.subscription = this.shareableStreamStoreService.getStream('selectMonth')
       .asObservable()
-      .subscribe(value => this.currMonth = value);
+      .subscribe(value => {
+        this.showMonth = true;
+        this.currMonth = value;
+      });
   }
 
   public btnPrev() {
@@ -49,19 +59,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public onSelectedMonth() {
-    /* делаем все false
-    * поле year делаем true */
+    // Показать или скрыть месяц
+    this.showMonth = false;
+
+    /* делаем все false => поле year делаем true */
     const value = this.localStorageSer.getData('selectedMY');
     for (const i in value) {
       if (value[i].active === true)
         value[i].active = false;
     }
     value['month'].active = true;
+    this.localStorageSer.setData('selectedMY', value);
     this.shareableStreamStoreService.emit('SelectedMY', value );
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (isNullOrUndefined(this.subscription))
+      this.subscription.unsubscribe();
   }
 
 }

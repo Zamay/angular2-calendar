@@ -7,6 +7,7 @@ import { Subscription }      from 'rxjs/Subscription';
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
 import { LocalStorageService }                 from '../../../services/local-storage-service.service';
+import {MONTHS} from "../../../shared/cal.data";
 
 @Component({
   selector:    'app-week',
@@ -20,16 +21,22 @@ export class WeeksComponent implements OnInit, OnDestroy {
   public showNotes:     any;
   public arrNotes:      any;
   public daysOfMonth:   any;
+
+  public Months: Array<string> = MONTHS;
   public subscription:  Subscription;
   constructor(
+
     private dateServive: DateService,
-    private todoService: LocalStorageService,
+    private localStorageSer: LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) { }
 
   ngOnInit() {
-    this.weeks = this.dateServive.showCurrMonth()[3];
-    this.day   = this.dateServive.showCurrMonth()[1];
+    const valueState = this.localStorageSer.getData('selectedMY');
+    this.day =  this.Months[valueState['month'].number];
+
+    this.weeks = this.dateServive.getDaysOfMonth(valueState['year'].number, valueState['month'].number);
+
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => {
@@ -61,7 +68,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
     let dayOfMonth = {};
     for (let item = 0; item < this.weeks.length; item++) {
       for (const i of this.weeks[item]) {
-        const notes = this.todoService.getLocalStorage(['', month, i.day, i.year]);
+        const notes = this.localStorageSer.getLocalStorage(['', month, i.day, i.year]);
         if (notes !== null) {
           this.showNotes = {
             day: i.day,
