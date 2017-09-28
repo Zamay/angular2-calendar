@@ -2,6 +2,7 @@ import { Component, Input, OnInit}     from '@angular/core';
 
 import { DateService }                 from '../../../services/date.service';
 import { ShareableStreamStoreService } from '../../../services/shareable-stream-store.service';
+import {isUndefined} from "util";
 
 
 @Component({
@@ -11,37 +12,30 @@ import { ShareableStreamStoreService } from '../../../services/shareable-stream-
 })
 export class WeekdayComponent implements OnInit {
 
-  @Input() Week:     any;
-  @Input() arrNotes:    any;
-  @Input() daysOfMonth: any;
-
-  public   months:      any;
-  public   items:       any;
-  public   selectedDay: any;
-  public   dayMonYear:  any;
+  @Input() weekday:     any;
+  public day: string | number;
   constructor(
-    private dateServive: DateService,
-    private shareableStreamStoreService: ShareableStreamStoreService
   ) {
   }
 
   ngOnInit() {
+    this.day = this.weekday.day || 0;
   }
 
   public selectDay(item: any) {
-    // текущено дню добавить класс activeDate
-    console.log(this.daysOfMonth);
-    for (const obj of this.daysOfMonth) {
-      if (obj.active === true ) {
-        obj.active = false;
-      }
-
-      if ( item.day === obj.day) {
-        obj.active = true;
-      }
-    }
+    // // текущено дню добавить класс activeDate
+    // console.log(this.daysOfMonth);
+    // for (const obj of this.daysOfMonth) {
+    //   if (obj.active === true ) {
+    //     obj.active = false;
+    //   }
+    //
+    //   if ( item.day === obj.day) {
+    //     obj.active = true;
+    //   }
+    // }
 
     // выбор даты
-    this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay) );
+    // this.shareableStreamStoreService.emit('SelectedDay', this.dateServive.selectedDay(item.day, item.passDay) );
   }
 }

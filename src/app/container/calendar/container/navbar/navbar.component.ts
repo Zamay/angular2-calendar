@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public showMonth: boolean = true;
   public Months: Array<string> = MONTHS;
   public subscription:  Subscription;
+  public subBtnPrev:  Subscription;
+  public subBtnNext:  Subscription;
   constructor(
     private dateServive: DateService,
     private shareableStreamStoreService: ShareableStreamStoreService,
@@ -31,14 +33,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
 
-    this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
+    this.subBtnPrev = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => {
         this.currMonth = this.localStorageSer.getData('selectedMY');
         this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
       });
 
-    this.subscription = this.shareableStreamStoreService.getStream('btnNext')
+    this.subBtnNext = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
       .subscribe(value => {
         this.currMonth = this.localStorageSer.getData('selectedMY');
@@ -87,8 +89,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (isNullOrUndefined(this.subscription))
-      this.subscription.unsubscribe();
+    this.subBtnPrev.unsubscribe();
+    this.subBtnNext.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

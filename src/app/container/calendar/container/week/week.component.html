@@ -1,5 +1,5 @@
-<div id="tabs">
-  <div  *ngFor="let week of weeks; let i = index">
-    <app-weekday [Week]="week" [arrNotes]="arrNotes" [daysOfMonth]="daysOfMonth"></app-weekday>
+<div class="_week">
+  <div  *ngFor="let weekday of week">
+    <app-weekday [weekday]="weekday"></app-weekday>
   </div>
 </div>

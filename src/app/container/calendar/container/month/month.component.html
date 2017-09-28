@@ -1,5 +1,5 @@
-<div class="_month">
-  <div class="_month-name" *ngFor="let month of months; let i = index" (click)="selectMonth(i)">
-    {{month}}
+<div class="_weeks">
+  <div  *ngFor="let week of weeks">
+    <app-week [week]="week"></app-week>
   </div>
 </div>

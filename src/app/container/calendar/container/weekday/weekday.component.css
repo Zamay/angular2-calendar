@@ -1,7 +1,31 @@
 ._weekday {
-  display: flex;
   font-family: "Roboto Condensed", sans-serif;
+  margin: 2px;
+  padding:13px 0;
+  cursor: pointer;
+  line-height: 16px;
+  text-align: center;
 }
+
+._weekday:hover {
+  background-color: #4adcb5;
+  border-radius: 50%;
+  width: 40px;
+  height: 14px;
+  /*line-height: 16px;*/
+  transition: 0.5s all;
+  /*margin-left: 8px;*/
+  color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
 
 ._day {
   width: 14.28571429%;
