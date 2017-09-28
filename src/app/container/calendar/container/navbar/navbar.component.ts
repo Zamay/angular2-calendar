@@ -27,22 +27,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    // Повтор кода и очень много !!! TODO: Убрать !! Пиши нормально ...
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
 
-    //TODO:переделать кнопки !
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
-      .subscribe(value => this.currMonth = value);
+      .subscribe(value => {
+        this.currMonth = this.localStorageSer.getData('selectedMY');
+        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+      });
 
     this.subscription = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
-      .subscribe(value => this.currMonth = value);
+      .subscribe(value => {
+        this.currMonth = this.localStorageSer.getData('selectedMY');
+        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+      });
 
     this.subscription = this.shareableStreamStoreService.getStream('SelectedMY')
       .asObservable()
       .subscribe(value => {
-        console.log('1');
         this.showMonth = true;
         this.currMonth = value;
         this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
@@ -50,11 +55,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public btnPrev() {
-    this.shareableStreamStoreService.emit('btnPrev' , this.dateServive.previousMonth());
+    this.currMonth = this.localStorageSer.getData('selectedMY');
+    this.shareableStreamStoreService.emit('btnPrev' ,
+      this.dateServive.previousMonth(this.currMonth['year'].number, this.currMonth['month'].number));
   }
 
   public btnNext() {
-    this.shareableStreamStoreService.emit('btnNext' , this.dateServive.nextMonth());
+    this.currMonth = this.localStorageSer.getData('selectedMY');
+    this.shareableStreamStoreService.emit('btnNext' ,
+      this.dateServive.nextMonth(this.currMonth['year'].number, this.currMonth['month'].number));
   }
 
   public onSelectedMonth() {

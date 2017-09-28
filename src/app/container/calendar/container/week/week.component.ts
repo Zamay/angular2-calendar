@@ -40,15 +40,15 @@ export class WeeksComponent implements OnInit, OnDestroy {
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => {
-        this.weeks = value[2];
-        this.showNote(value[0]);
+        this.weeks = value;
+        // this.showNote(value[0]);
       });
 
     this.subscription = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
       .subscribe(value => {
-        this.weeks = value[2];
-        this.showNote(value[0]);
+        this.weeks = value;
+        // this.showNote(value[0]);
       });
 
     this.showNote(this.day);

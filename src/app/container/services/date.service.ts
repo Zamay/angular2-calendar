@@ -43,26 +43,35 @@ export class DateService {
 
   }
 
-  public nextMonth() {
-    if (this.currMonth === 11) {
-      this.currMonth = 0;
-      this.currYear = this.currYear + 1;
+  public nextMonth(y, m) {
+    if (m === 11) {
+      m = 0;
+      y = y + 1;
     } else {
-      this.currMonth = this.currMonth + 1;
+      m = m + 1;
     }
-    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, obj_arrDay];
+
+    this.valueState['year'].number = y;
+    this.valueState['month'].number = m;
+    this.localStorageSer.setData('selectedMY', this.valueState);
+
+    return this.getDaysOfMonth(y, m);
+    // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
-  public previousMonth() {
-    if (this.currMonth === 0) {
-      this.currMonth = 11;
-      this.currYear = this.currYear - 1;
+  public previousMonth(y, m) {
+    if (m === 0) {
+      m = 11;
+      y = y - 1;
     } else {
-      this.currMonth = this.currMonth - 1;
+      m = m - 1;
     }
-    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
-    return [this.Months[this.currMonth], this.currYear, obj_arrDay];
+    this.valueState['year'].number = y;
+    this.valueState['month'].number = m;
+    this.localStorageSer.setData('selectedMY', this.valueState);
+
+    return this.getDaysOfMonth(y, m);
+    // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
   public showCurrMonth() {
