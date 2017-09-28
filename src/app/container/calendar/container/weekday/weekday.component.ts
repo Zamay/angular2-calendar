@@ -11,7 +11,7 @@ import { ShareableStreamStoreService } from '../../../services/shareable-stream-
 })
 export class WeekdayComponent implements OnInit {
 
-  @Input() numWeek:     any;
+  @Input() Week:     any;
   @Input() arrNotes:    any;
   @Input() daysOfMonth: any;
 
@@ -26,12 +26,11 @@ export class WeekdayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dayMonYear = this.dateServive.showCurrMonth();
-    this.items = this.dayMonYear[3][this.numWeek];
   }
 
   public selectDay(item: any) {
     // текущено дню добавить класс activeDate
+    console.log(this.daysOfMonth);
     for (const obj of this.daysOfMonth) {
       if (obj.active === true ) {
         obj.active = false;

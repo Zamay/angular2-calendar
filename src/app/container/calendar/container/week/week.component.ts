@@ -33,7 +33,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const valueState = this.localStorageSer.getData('selectedMY');
-    this.day =  this.Months[valueState['month'].number];
+    this.day =  this.Months[valueState['month'].number];  // это месяц .. почему то day у него имя ?!
 
     this.weeks = this.dateServive.getDaysOfMonth(valueState['year'].number, valueState['month'].number);
 

@@ -29,11 +29,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
-    // this.currMonth['month'].number = this.Months[this.currMonth['month'].number]
-    // this.currMonth = this.dateServive.showCurrMonth() || ['Month' , 'selectedDay'];
-    // console.log(this.currMonth);
 
-
+    //TODO:переделать кнопки !
     this.subscription = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
       .subscribe(value => this.currMonth = value);
@@ -42,11 +39,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .asObservable()
       .subscribe(value => this.currMonth = value);
 
-    this.subscription = this.shareableStreamStoreService.getStream('selectMonth')
+    this.subscription = this.shareableStreamStoreService.getStream('SelectedMY')
       .asObservable()
       .subscribe(value => {
+        console.log('1');
         this.showMonth = true;
         this.currMonth = value;
+        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
       });
   }
 
@@ -59,8 +58,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public onSelectedMonth() {
-    // Показать или скрыть месяц
-    this.showMonth = false;
 
     /* делаем все false => поле year делаем true */
     const value = this.localStorageSer.getData('selectedMY');
@@ -71,6 +68,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     value['month'].active = true;
     this.localStorageSer.setData('selectedMY', value);
     this.shareableStreamStoreService.emit('SelectedMY', value );
+
+    this.showMonth = false;                       // Показать или скрыть месяц в шаблоне
   }
 
   ngOnDestroy() {

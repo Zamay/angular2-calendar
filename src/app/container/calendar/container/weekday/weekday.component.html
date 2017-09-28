@@ -1,9 +1,8 @@
 <div class="_weekday">
   <div class="_day"
-        *ngFor="let item of items; let i = index"
+        *ngFor="let item of Week; let i = index"
         [ngClass]="{'current': item.type === 'current',
-                    'passDay': item.passDay == true,
-                    'activeDate': daysOfMonth[7*numWeek + i].active === true
+                    'passDay': item.passDay == true
                     }"
         (click)="selectDay(item)">{{item['day']}}
 
@@ -13,3 +12,9 @@
 
   </div>
 </div>
+
+
+<!--[ngClass]="{'current': item.type === 'current',-->
+<!--'passDay': item.passDay == true,-->
+<!WeekveDate': daysOfMonth[7*numWeek + i].active === true-->
+<!--}"-->
