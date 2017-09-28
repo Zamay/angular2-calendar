@@ -56,18 +56,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public btnPrev() {
     this.currMonth = this.localStorageSer.getData('selectedMY');
-    this.shareableStreamStoreService.emit('btnPrev' ,
-      this.dateServive.previousMonth(this.currMonth['year'].number, this.currMonth['month'].number));
+    this.shareableStreamStoreService.emit('btnPrev',
+      this.dateServive.previousMonth(
+        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth['weeks'].active
+      )
+    );
   }
 
   public btnNext() {
     this.currMonth = this.localStorageSer.getData('selectedMY');
-    this.shareableStreamStoreService.emit('btnNext' ,
-      this.dateServive.nextMonth(this.currMonth['year'].number, this.currMonth['month'].number));
+    this.shareableStreamStoreService.emit('btnNext',
+      this.dateServive.nextMonth(
+        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth['weeks'].active
+      )
+    );
   }
 
   public onSelectedMonth() {
-
     /* делаем все false => поле year делаем true */
     const value = this.localStorageSer.getData('selectedMY');
     for (const i in value) {

@@ -43,14 +43,18 @@ export class DateService {
 
   }
 
-  public nextMonth(y, m) {
-    if (m === 11) {
-      m = 0;
-      y = y + 1;
+  public nextMonth(y, m, state) {
+    if (state) {
+      if (m === 11) {
+        m = 0;
+        y = y + 1;
+      } else {
+        m = m + 1;
+      }
     } else {
-      m = m + 1;
+      y += 1;
     }
-
+    this.valueState = this.localStorageSer.getData('selectedMY');
     this.valueState['year'].number = y;
     this.valueState['month'].number = m;
     this.localStorageSer.setData('selectedMY', this.valueState);
@@ -59,13 +63,19 @@ export class DateService {
     // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
-  public previousMonth(y, m) {
-    if (m === 0) {
-      m = 11;
-      y = y - 1;
+  public previousMonth(y, m, state) {
+    if (state) {
+      if (m === 0) {
+        m = 11;
+        y = y - 1;
+      } else {
+        m = m - 1;
+      }
     } else {
-      m = m - 1;
+      y -= 1;
     }
+
+    this.valueState = this.localStorageSer.getData('selectedMY');
     this.valueState['year'].number = y;
     this.valueState['month'].number = m;
     this.localStorageSer.setData('selectedMY', this.valueState);
