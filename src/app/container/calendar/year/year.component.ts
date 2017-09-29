@@ -1,22 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DateService} from "../../../services/date.service";
-import {LocalStorageService} from "../../../services/local-storage-service.service";
-import {ShareableStreamStoreService} from "../../../services/shareable-stream-store.service";
-import {Subscription} from "rxjs/Subscription";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription }                 from 'rxjs/Subscription';
+
+import { DateService }                  from '../../services/date.service';
+import { LocalStorageService }          from '../../services/local-storage-service.service';
+import { ShareableStreamStoreService }  from '../../services/shareable-stream-store.service';
 
 @Component({
-  selector: 'app-year',
+  selector:    'app-year',
   templateUrl: './year.component.html',
-  styleUrls: ['./year.component.css']
+  styleUrls:   ['./year.component.css']
 })
 export class YearComponent implements OnInit, OnDestroy {
 
-  public years: Array<number>;
+  public years:        Array<number>;
   public subBtnPrevY:  Subscription;
   public subBtnNextY:  Subscription;
   constructor(
-    private dateServive: DateService,
-    private localStorageSer: LocalStorageService,
+    private dateServive:      DateService,
+    private localStorageSer:  LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) { }
 

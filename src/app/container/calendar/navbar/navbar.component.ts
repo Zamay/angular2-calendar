@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { DateService }                  from '../../../services/date.service';
-import { ShareableStreamStoreService }  from '../../../services/shareable-stream-store.service';
-import {LocalStorageService} from "../../../services/local-storage-service.service";
-import {MONTHS} from "../../../shared/cal.data";
-import {isNullOrUndefined} from "util";
+import { DateService }                  from '../../services/date.service';
+import { ShareableStreamStoreService }  from '../../services/shareable-stream-store.service';
+import { LocalStorageService }          from "../../services/local-storage-service.service";
+
+import { MONTHS }                       from "../../shared/cal.data";
 
 @Component({
   selector:    'app-navbar',
@@ -13,11 +13,11 @@ import {isNullOrUndefined} from "util";
   styleUrls:   ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  public currMonth: any;
-  public showMonth: boolean = true;
-  public Months: Array<string> = MONTHS;
-  public selectM:  Subscription;
-  public selectY:  Subscription;
+  public currMonth:   any;
+  public showMonth:   boolean = true;
+  public Months:      Array<string> = MONTHS;
+  public selectM:     Subscription;
+  public selectY:     Subscription;
   public subBtnPrev:  Subscription;
   public subBtnNext:  Subscription;
   constructor(
@@ -25,11 +25,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private shareableStreamStoreService: ShareableStreamStoreService,
     private localStorageSer: LocalStorageService
   ) {
-
   }
 
   ngOnInit() {
-
     // Повтор кода и очень много !!! TODO: Убрать !! Пиши нормально ...
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];

@@ -7,22 +7,21 @@ import {ShareableStreamStoreService} from "./shareable-stream-store.service";
 @Injectable()
 export class DateService {
 
-  public Months: Array<string> = MONTHS;
-  public Days: Array<any> = DAYS;
-  public currMonth: number;
-  public currYear: number;
-  public currDay: number;
-  public passDays: boolean = true;
-  public valueState: any;
-  public years: any;
+  public Months:      Array<string> = MONTHS;
+  public Days:        Array<any> = DAYS;
+  public currMonth:   number;
+  public currYear:    number;
+  public currDay:     number;
+  public passDays:    boolean = true;
+  public valueState:  any;
+  public years:       any;
   constructor(
-    private localStorageSer: LocalStorageService,
-    private shareableStreamStoreService: ShareableStreamStoreService
+    private localStorageSer:              LocalStorageService,
+    private shareableStreamStoreService:  ShareableStreamStoreService
   ) {
     this.totalDate();
   }
 
-  // +
   public totalDate() {
     let d = new Date();
     this.currMonth = d.getMonth();
@@ -45,11 +44,10 @@ export class DateService {
       };
       this.localStorageSer.setData('selectedMY', this.valueState);
     }
-
+    // статически задал значение( TODO: сделать не статически!
     this.years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
   }
 
-  // +
   public nextMonth(y, m, state) {
     if (state['weeks'].active) {
       if (m === 11) {
@@ -76,7 +74,6 @@ export class DateService {
     // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
-  // +
   public previousMonth(y, m, state) {
     if (state['weeks'].active) {
       if (m === 0) {
@@ -103,7 +100,6 @@ export class DateService {
     // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
-  // +
   public getNameMonths() {
     return this.Months;
   }
@@ -112,7 +108,7 @@ export class DateService {
     return this.years;
   }
 
-  // +
+  // TODO: переписать говно код
   // получение даты
   public getDaysOfMonth(y, m) {
     console.log('1');
@@ -122,8 +118,8 @@ export class DateService {
       lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
     const arrs = [];
-    let arr = [];
-    let obj = {};
+    let arr = [],
+        obj = {};
 
     let i = 1;
     do {

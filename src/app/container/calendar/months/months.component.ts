@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {DateService} from "../../../services/date.service";
-import {MONTHS} from "../../../shared/cal.data";
-import {LocalStorageService} from "../../../services/local-storage-service.service";
-import {ShareableStreamStoreService} from "../../../services/shareable-stream-store.service";
-import {Subscription} from "rxjs/Subscription";
+
+import { DateService }                 from '../../services/date.service';
+import { LocalStorageService }         from '../../services/local-storage-service.service';
+import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
 
 @Component({
-  selector: 'app-months',
+  selector:    'app-months',
   templateUrl: './months.component.html',
-  styleUrls: ['./months.component.css']
+  styleUrls:   ['./months.component.css']
 })
 export class MonthsComponent implements OnInit {
 
-  public Months: Array<string> = MONTHS;
   public months: any;
   constructor(
-    private dateServive: DateService,
-    private localStorageSer: LocalStorageService,
+    private dateServive:      DateService,
+    private localStorageSer:  LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
   ) { }
 
@@ -27,7 +25,6 @@ export class MonthsComponent implements OnInit {
   public selectMonth(item: any) {
     const value = this.localStorageSer.getData('selectedMY');
     value['month'].number = item;                                // номер выбраного месяца
-
     value['month'].active = false;                               // скрываем текущи компонент
     value['weeks'].active = true;                                // делаем отображение компонента
     this.localStorageSer.setData('selectedMY', value);           // запишем в локалСтор

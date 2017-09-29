@@ -1,6 +1,6 @@
 import { Component }  from '@angular/core';
 
-import { DaysOfWeek } from '../../../shared/cal.data';
+import { DaysOfWeek } from '../../shared/cal.data';
 
 @Component({
   selector:    'app-weekname',

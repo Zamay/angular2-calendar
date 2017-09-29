@@ -1,11 +1,11 @@
-._cal {
+._calendar {
   display: grid;
   grid-template-columns: minmax(250px, 350px);
   justify-content: center;
 }
 
 @media (min-width: 640px) {
-  ._cal {
+  ._calendar {
     display: grid;
     justify-content: stretch;
     align-self: stretch;
