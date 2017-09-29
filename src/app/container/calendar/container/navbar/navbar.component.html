@@ -2,7 +2,7 @@
   <div class="_prev">
     <button (click)="btnPrev()"><</button>
   </div>
-  <div class="_months">
+  <div class="_months" [ngClass]="{'default-cursor': currMonth['year'].active}">
     <span (click)="onSelectedMonth()">
       <span *ngIf="showMonth">
         {{currMonth['month'].number}}

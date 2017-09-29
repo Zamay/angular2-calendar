@@ -2,6 +2,7 @@ import {Injectable}   from '@angular/core';
 
 import {DAYS, MONTHS} from '../shared/cal.data';
 import {LocalStorageService} from "./local-storage-service.service";
+import {ShareableStreamStoreService} from "./shareable-stream-store.service";
 
 @Injectable()
 export class DateService {
@@ -13,10 +14,15 @@ export class DateService {
   public currDay: number;
   public passDays: boolean = true;
   public valueState: any;
-  constructor(private localStorageSer: LocalStorageService) {
+  public years: any;
+  constructor(
+    private localStorageSer: LocalStorageService,
+    private shareableStreamStoreService: ShareableStreamStoreService
+  ) {
     this.totalDate();
   }
 
+  // +
   public totalDate() {
     let d = new Date();
     this.currMonth = d.getMonth();
@@ -37,23 +43,30 @@ export class DateService {
           number: this.currYear
         },
       };
-
       this.localStorageSer.setData('selectedMY', this.valueState);
     }
 
+    this.years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
   }
 
+  // +
   public nextMonth(y, m, state) {
-    if (state) {
+    if (state['weeks'].active) {
       if (m === 11) {
         m = 0;
         y = y + 1;
       } else {
         m = m + 1;
       }
-    } else {
+    }
+    if (state['month'].active) {
       y += 1;
     }
+    if (state['year'].active) {
+      this.years = this.years.map(item => (item + 10));
+      this.shareableStreamStoreService.emit('bntNextY', this.years);
+    }
+
     this.valueState = this.localStorageSer.getData('selectedMY');
     this.valueState['year'].number = y;
     this.valueState['month'].number = m;
@@ -63,16 +76,22 @@ export class DateService {
     // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
   }
 
+  // +
   public previousMonth(y, m, state) {
-    if (state) {
+    if (state['weeks'].active) {
       if (m === 0) {
         m = 11;
         y = y - 1;
       } else {
         m = m - 1;
       }
-    } else {
+    }
+    if (state['month'].active) {
       y -= 1;
+    }
+    if (state['year'].active) {
+      this.years = this.years.map(item => (item - 10));
+      this.shareableStreamStoreService.emit('bntRevY', this.years);
     }
 
     this.valueState = this.localStorageSer.getData('selectedMY');
@@ -82,16 +101,6 @@ export class DateService {
 
     return this.getDaysOfMonth(y, m);
     // return [this.Months[this.currMonth], this.currYear, obj_arrDay];
-  }
-
-  public showCurrMonth() {
-    this.passDays = true;
-    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
-    return [this.currDay, this.Months[this.currMonth], this.currYear, obj_arrDay];
-  }
-
-  public currSelecDay() {
-    return this.selectedDay(this.currDay, '');
   }
 
   // +
@@ -99,11 +108,11 @@ export class DateService {
     return this.Months;
   }
 
-  public selectedDay(day: number, item: any) {
-    const weekDay = this.Days[new Date(this.currYear, this.currMonth, day).getUTCDay()].long;
-    return [weekDay, this.Months[this.currMonth], day, this.currYear, item];
+  public getYears() {
+    return this.years;
   }
 
+  // +
   // получение даты
   public getDaysOfMonth(y, m) {
     console.log('1');
@@ -213,4 +222,20 @@ export class DateService {
     return arrs;
   }
 
+
+  // методы todo
+  public showCurrMonth() {
+    this.passDays = true;
+    const obj_arrDay = this.getDaysOfMonth(this.currYear, this.currMonth);
+    return [this.currDay, this.Months[this.currMonth], this.currYear, obj_arrDay];
+  }
+
+  public currSelecDay() {
+    return this.selectedDay(this.currDay, '');
+  }
+
+  public selectedDay(day: number, item: any) {
+    const weekDay = this.Days[new Date(this.currYear, this.currMonth, day).getUTCDay()].long;
+    return [weekDay, this.Months[this.currMonth], day, this.currYear, item];
+  }
 }

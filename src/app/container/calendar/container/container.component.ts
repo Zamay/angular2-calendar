@@ -12,6 +12,8 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   public valueState:    any;
   public subscription:  Subscription;
+  public selectY:       Subscription;
+  public selectM:       Subscription;
   constructor (
     private localStorageSer: LocalStorageService,
     private shareableStreamStoreService: ShareableStreamStoreService
@@ -20,15 +22,21 @@ export class ContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Значение компонентов  true or false
+    // Значение компонентов  true or false по умолчанию weeks = true
     this.valueState = this.localStorageSer.getData('selectedMY');
-    // Подписаться на изменение знаачения
-    this.subscription = this.shareableStreamStoreService.getStream('SelectedMY')
+
+    this.selectM = this.shareableStreamStoreService.getStream('selectM')
+      .asObservable()
+      .subscribe(value => this.valueState = value);
+
+    this.selectY = this.shareableStreamStoreService.getStream('selectY')
       .asObservable()
       .subscribe(value => this.valueState = value);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.selectY.unsubscribe();
+    this.selectM.unsubscribe();
   }
 }

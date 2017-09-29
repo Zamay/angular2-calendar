@@ -1,3 +1,5 @@
-<p>
-  years works!
-</p>
+<div class="_years">
+  <div class="_year" (click)="selectYear(year)" *ngFor="let year of years">
+    {{year}}
+  </div>
+</div>

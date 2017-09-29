@@ -1,6 +1,6 @@
 ._month {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
+  grid-template-columns: repeat(3, 1fr);
 }
 ._month-name {
   justify-self: center;
@@ -13,5 +13,4 @@
 ._month-name:hover {
   border: 1px solid;
   border-radius: 5px;
-
 }

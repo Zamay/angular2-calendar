@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public currMonth: any;
   public showMonth: boolean = true;
   public Months: Array<string> = MONTHS;
-  public subscription:  Subscription;
+  public selectM:  Subscription;
+  public selectY:  Subscription;
   public subBtnPrev:  Subscription;
   public subBtnNext:  Subscription;
   constructor(
@@ -47,12 +48,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
       });
 
-    this.subscription = this.shareableStreamStoreService.getStream('SelectedMY')
+    this.selectM = this.shareableStreamStoreService.getStream('selectM')
       .asObservable()
       .subscribe(value => {
         this.showMonth = true;
         this.currMonth = value;
         this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+      });
+
+    this.selectY = this.shareableStreamStoreService.getStream('selectY')
+      .asObservable()
+      .subscribe(value => {
+        this.showMonth = false;
+        this.currMonth = value;
       });
   }
 
@@ -60,7 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.shareableStreamStoreService.emit('btnPrev',
       this.dateServive.previousMonth(
-        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth['weeks'].active
+        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth
       )
     );
   }
@@ -69,21 +77,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.currMonth = this.localStorageSer.getData('selectedMY');
     this.shareableStreamStoreService.emit('btnNext',
       this.dateServive.nextMonth(
-        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth['weeks'].active
+        this.currMonth['year'].number, this.currMonth['month'].number, this.currMonth
       )
     );
   }
 
   public onSelectedMonth() {
-    /* делаем все false => поле year делаем true */
+    /*
+    * if ( weeks == true => month = true
+    * if ( month == true => year  = true
+    *
+    * */
     const value = this.localStorageSer.getData('selectedMY');
-    for (const i in value) {
-      if (value[i].active === true)
-        value[i].active = false;
+
+    if (value['month'].active === true) {
+      value['month'].active = false;
+      value['year'].active = true;
     }
-    value['month'].active = true;
+    if ( value['weeks'].active === true) {
+      value['weeks'].active = false;
+      value['month'].active = true;
+    }
+
     this.localStorageSer.setData('selectedMY', value);
-    this.shareableStreamStoreService.emit('SelectedMY', value );
+    this.shareableStreamStoreService.emit('selectM', value );
 
     this.showMonth = false;                       // Показать или скрыть месяц в шаблоне
   }
@@ -91,7 +108,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subBtnPrev.unsubscribe();
     this.subBtnNext.unsubscribe();
-    this.subscription.unsubscribe();
+    this.selectM.unsubscribe();
+    this.selectY.unsubscribe();
   }
 
 }

@@ -1,0 +1,16 @@
+._years {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+._year {
+  justify-self: center;
+  padding: 5px;
+  margin: 10px;
+  height: 30px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+._year:hover {
+  border: 1px solid;
+  border-radius: 5px;
+}

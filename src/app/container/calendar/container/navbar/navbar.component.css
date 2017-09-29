@@ -63,3 +63,8 @@ button {
     font-size: 1.5em;
   }
 }
+
+
+.default-cursor {
+  cursor: default
+}

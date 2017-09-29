@@ -1,4 +1,4 @@
 ._week {
   display: grid;
-  grid-template-columns: repeat(7, 45px);
+  grid-template-columns: repeat(7, 1fr);
 }
