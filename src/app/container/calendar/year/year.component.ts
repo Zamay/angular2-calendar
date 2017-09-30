@@ -39,7 +39,7 @@ export class YearComponent implements OnInit, OnDestroy {
     value['year'].active = false;                               // скрываем текущи компонент
     value['month'].active = true;                               // делаем отображение компонента
     this.localStorageSer.setData('selectedMY', value);          // запишем в локалСтор
-    this.shareableStreamStoreService.emit('selectY', value);    // сменить отображение другого компонента
+    this.shareableStreamStoreService.emit('selectY', value);    // сменить отображение navbar компонента
   }
 
   ngOnDestroy() {

@@ -5,7 +5,9 @@ import { Observable }   from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ShareableStreamStoreService }  from '../services/shareable-stream-store.service';
-import { DateService }                  from '../services/date.service';
+import { LocalStorageService }          from "../services/local-storage-service.service";
+import { DateService }                  from "../services/date.service";
+
 @Component({
   selector:    'app-header',
   templateUrl: './header.component.html',
@@ -18,13 +20,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public subscription:  Subscription;
   constructor(
     private shareableStreamStoreService: ShareableStreamStoreService,
-    private dateServive: DateService
+    private dateServive: DateService,
+    private localStorageSer:              LocalStorageService,
   ) {
     this.clock = Observable.interval(1000).map(() => new Date());
     this.date = this.dateServive.currSelecDay();
   }
   ngOnInit() {
-    this.subscription = this.shareableStreamStoreService.getStream('SelectedDay')
+    this.subscription = this.shareableStreamStoreService.getStream('selectMY')
       .asObservable()
       .subscribe(value => this.date = value);
   }
@@ -33,3 +36,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 }
+
+// this.date = this.localStorageSer.getData('selectedMY');

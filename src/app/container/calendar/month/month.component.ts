@@ -12,7 +12,7 @@ import { ShareableStreamStoreService }  from '../../services/shareable-stream-st
 })
 export class MonthComponent implements OnInit, OnDestroy {
 
-  public weeks:       Array<any>;
+  public month:       Array<any>;
   public valueStatus: any;
   public subBtnPrev:  Subscription;
   public subBtnNext:  Subscription;
@@ -24,15 +24,15 @@ export class MonthComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.valueStatus = this.localStorageSer.getData('selectedMY');
-    this.weeks = this.dateServive.getDaysOfMonth(this.valueStatus['year'].number, this.valueStatus['month'].number);
+    this.month = this.dateServive.getDaysOfMonth(this.valueStatus['year'].number, this.valueStatus['month'].number);
 
     this.subBtnPrev = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
-      .subscribe(value => this.weeks = value);
+      .subscribe(value => this.month = value);
 
     this.subBtnNext = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
-      .subscribe(value => this.weeks = value);
+      .subscribe(value => this.month = value);
   }
   ngOnDestroy() {
     this.subBtnPrev.unsubscribe();

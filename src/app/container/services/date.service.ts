@@ -20,18 +20,12 @@ export class DateService {
     private shareableStreamStoreService:  ShareableStreamStoreService
   ) {
     this.totalDate();
-  }
-
-  public totalDate() {
-    let d = new Date();
-    this.currMonth = d.getMonth();
-    this.currYear = d.getFullYear();
-    this.currDay = d.getDate();
 
     if (this.valueState ===  undefined ) {
       this.valueState = {
-        weeks: {
-          active: true
+        days: {
+          active: true,
+          number: this.currDay
         },
         month: {
           active: false,
@@ -48,8 +42,15 @@ export class DateService {
     this.years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
   }
 
+  public totalDate() {
+    let d = new Date();
+    this.currMonth = d.getMonth();
+    this.currYear = d.getFullYear();
+    this.currDay = d.getDate();
+  }
+
   public nextMonth(y, m, state) {
-    if (state['weeks'].active) {
+    if (state['days'].active) {
       if (m === 11) {
         m = 0;
         y = y + 1;
@@ -75,7 +76,7 @@ export class DateService {
   }
 
   public previousMonth(y, m, state) {
-    if (state['weeks'].active) {
+    if (state['days'].active) {
       if (m === 0) {
         m = 11;
         y = y - 1;

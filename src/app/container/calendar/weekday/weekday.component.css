@@ -1,62 +1,62 @@
-._weekday {
+._day {
   font-family: "Roboto Condensed", sans-serif;
   margin: 2px;
-  padding:13px 0;
+  padding:15px 0;
   cursor: pointer;
   line-height: 16px;
   text-align: center;
 }
 
-._weekday:hover {
-  background-color: #4adcb5;
-  border-radius: 50%;
-  width: 40px;
-  height: 14px;
-  transition: 0.5s all;
-  color: #ffffff;
-}
-
-
-
-
-
-
-
-
-
-
-._day {
-  width: 14.28571429%;
-  text-align: center;
-  padding:13px 0;
-  align-self: center;
-  cursor: pointer
-}
 ._day:hover {
   background-color: #4adcb5;
   border-radius: 50%;
-  width: 40px;
-  height: 14px;
-  line-height: 16px;
   transition: 0.5s all;
-  margin-left: 8px;
+  color: #ffffff;
+  z-index: 100;
+}
+.current {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.activeDate {
+  background-color: #0DAD83;
+  border-radius: 50%;
+  transition: 0.5s all;
   color: #ffffff;
 }
+.hide {
+  display: none;
+}
+
+
+
+
+
+
+
+/*._day {*/
+  /*width: 14.28571429%;*/
+  /*text-align: center;*/
+  /*padding:13px 0;*/
+  /*align-self: center;*/
+  /*cursor: pointer*/
+/*}*/
+/*._day:hover {*/
+  /*background-color: #4adcb5;*/
+  /*border-radius: 50%;*/
+  /*width: 40px;*/
+  /*height: 14px;*/
+  /*line-height: 16px;*/
+  /*transition: 0.5s all;*/
+  /*margin-left: 8px;*/
+  /*color: #ffffff;*/
+/*}*/
 
 .yesterday, .tomorrow, .lastDay {
   color: #c0c0c0;
 }
 
-.activeDate {
-  background-color: #0DAD83;
-  border-radius: 50%;
-  width: 40px;
-  height: 14px;
-  line-height: 16px;
-  transition: 0.5s all;
-  margin-left: 8px;
-  color: #ffffff;
-}
+
 
 .num_notes {
   position: absolute;
@@ -74,12 +74,4 @@
 .passDay {
   color: #c5c0c0;
 }
-.current {
-  border: 1px solid black;
-  color: #000;
-  border-radius: 50%;
-  width: 40px;
-  height: 14px;
-  line-height: 16px;
-  margin-left: 8px;
-}
+

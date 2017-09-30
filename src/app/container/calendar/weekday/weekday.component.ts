@@ -1,9 +1,10 @@
-import { Component, Input, OnInit}     from '@angular/core';
+import { Component, Input, OnInit}  from '@angular/core';
 
-import { DateService }                 from '../../services/date.service';
-import { ShareableStreamStoreService } from '../../services/shareable-stream-store.service';
-import {isUndefined} from "util";
+import { LocalStorageService }      from '../../services/local-storage-service.service';
+import {ShareableStreamStoreService} from "../../services/shareable-stream-store.service";
 
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector:    'app-weekday',
@@ -15,6 +16,8 @@ export class WeekdayComponent implements OnInit {
   @Input() weekday:     any;
   public day: string | number;
   constructor(
+    private localStorageSer:  LocalStorageService,
+    private shareableStreamStoreService: ShareableStreamStoreService
   ) {
   }
 
@@ -22,4 +25,16 @@ export class WeekdayComponent implements OnInit {
     this.day = this.weekday.day || 0;
   }
 
+  public selectDay(number: any) {
+    // TODO: Переписать без jQuery
+    $('._weekday').on('click', '._day', function () {
+      $('._weekday ._day').removeClass('activeDate');
+      $(this).addClass('activeDate');
+    });
+
+    let valueData = this.localStorageSer.getData('selectedMY');
+    valueData['days'].number = number.target.innerText;
+    this.localStorageSer.setData('selectedMY', valueData);
+    this.shareableStreamStoreService.emit('selectMY ', valueData);
+  }
 }

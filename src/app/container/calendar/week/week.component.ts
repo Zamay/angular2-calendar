@@ -1,20 +1,12 @@
-import {
-  Component, Input,
-  OnDestroy,
-  OnInit
-}             from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector:    'app-week',
   templateUrl: './week.component.html',
   styleUrls:   ['./week.component.css']
 })
-export class WeeksComponent implements OnInit, OnDestroy {
+export class WeeksComponent {
 
-  @Input() week:         any;
-  ngOnInit() {
-  }
+  @Input() week: any;
 
-  ngOnDestroy() {
-  }
 }

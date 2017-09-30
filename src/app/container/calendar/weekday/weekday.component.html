@@ -1,3 +1,7 @@
 <div class="_weekday">
-    {{day}}
+  <div class="_day"
+       [ngClass]="{ 'current': weekday['type'] == 'current', 'hide': day === 0 }"
+       (click)="selectDay($event)"
+  >{{day}}
+  </div>
 </div>

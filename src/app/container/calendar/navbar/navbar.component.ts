@@ -28,38 +28,34 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Повтор кода и очень много !!! TODO: Убрать !! Пиши нормально ...
-    this.currMonth = this.localStorageSer.getData('selectedMY');
-    this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+    this.valueData();
 
     this.subBtnPrev = this.shareableStreamStoreService.getStream('btnPrev')
       .asObservable()
-      .subscribe(value => {
-        this.currMonth = this.localStorageSer.getData('selectedMY');
-        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
-      });
+      .subscribe(value => this.valueData());
 
     this.subBtnNext = this.shareableStreamStoreService.getStream('btnNext')
       .asObservable()
-      .subscribe(value => {
-        this.currMonth = this.localStorageSer.getData('selectedMY');
-        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
-      });
+      .subscribe(value => this.valueData());
 
     this.selectM = this.shareableStreamStoreService.getStream('selectM')
       .asObservable()
       .subscribe(value => {
         this.showMonth = true;
-        this.currMonth = value;
-        this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
+        this.valueData(value);
       });
 
     this.selectY = this.shareableStreamStoreService.getStream('selectY')
       .asObservable()
       .subscribe(value => {
         this.showMonth = false;
-        this.currMonth = value;
+        this.valueData(value);
       });
+  }
+  // Убираем повторяющийся код
+  private valueData(value?: any) {
+    this.currMonth = value || this.localStorageSer.getData('selectedMY');
+    this.currMonth['month'].number =  this.Months[this.currMonth['month'].number];
   }
 
   public btnPrev() {
@@ -82,7 +78,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public onSelectedMonth() {
     /*
-    * if ( weeks == true => month = true
+    * if ( days == true => month = true
     * if ( month == true => year  = true
     *
     * */
@@ -92,17 +88,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
       value['month'].active = false;
       value['year'].active = true;
     }
-    if ( value['weeks'].active === true) {
-      value['weeks'].active = false;
+    if ( value['days'].active === true) {
+      value['days'].active = false;
       value['month'].active = true;
     }
 
     this.localStorageSer.setData('selectedMY', value);
     this.shareableStreamStoreService.emit('selectM', value );
 
-    this.showMonth = false;                       // Показать или скрыть месяц в шаблоне
+    // Показать или скрыть месяц в шаблоне
+    this.showMonth = false;
   }
 
+  // TODO:может как-то сократить ?!
   ngOnDestroy() {
     this.subBtnPrev.unsubscribe();
     this.subBtnNext.unsubscribe();

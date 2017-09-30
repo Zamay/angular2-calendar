@@ -26,7 +26,7 @@ export class MonthsComponent implements OnInit {
     const value = this.localStorageSer.getData('selectedMY');
     value['month'].number = item;                                // номер выбраного месяца
     value['month'].active = false;                               // скрываем текущи компонент
-    value['weeks'].active = true;                                // делаем отображение компонента
+    value['days'].active = true;                                // делаем отображение компонента
     this.localStorageSer.setData('selectedMY', value);           // запишем в локалСтор
     this.shareableStreamStoreService.emit('selectM', value );    // сменить отображение другого компонента
     this.shareableStreamStoreService.emit('selectMonth' ,        // получим выбранный месяц и тоже для подписки
